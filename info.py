@@ -2,44 +2,39 @@
 
 # package info
 name = 'symmetrics_config_german'
-tags = ()
+tags = ('magento', 'config', 'german', 'symmetrics')
 
 # relations
 requires = {
+    'magento': '*'
 }
 excludes = {
 }
 
 # who is responsible for this package?
 team_leader = {
-    'Leader': 'info@symmetrics.de'
+    'Sergej Braznikov': 'sb@symmetrics.de'
 }
 
 # who should check this package in the first place?
 maintainer = {
-    'Developer': 'info@symmetrics.de'
+    'Eugen Gitin': 'eg@symmetrics.de'
 }
 
 # relative installation path (e.g. app/code/local)
 install_path = ''
 
 # additional infos
-info = '[put some info here]'
+info = 'symmetrics Basiskonfiguration für deutsche Shops'
 summary = '''
-    [put more info here.
-    blaaa blaa
-    blaa blaaaaa
-    blaaaa.]
+    symmetrics Basiskonfiguration für deutsche Shops
 '''
 license = 'AFL 3.0'
 authors = {
-    'John Doe': 'info@symmetrics.de'
+    'Eugen Gitin': 'eg@symmetrics.de'
 }
 homepage = 'http://www.symmetrics.de'
 
 # files this package depends on
 depends_on_files = (
-    'app/code/core/.../1.php',
-    'app/code/core/.../2.php',
-    'app/code/core/.../3.php',
 )
