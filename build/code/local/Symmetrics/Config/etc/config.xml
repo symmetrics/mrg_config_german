@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Symmetrics_Config>
+			<version>0.0.1</version>
+			<depends>
+				<!-- no dependencies -->
+			</depends>
+		</Symmetrics_Config>
+	</modules>
+	<global>
+		<models />
+		<resources>
+			<symconfig_setup>
+				<setup>
+					<module>Symmetrics_Config</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</symconfig_setup>
+			<groupsstores_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</groupsstores_write>
+			<groupsstores_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</groupsstores_read>
+		</resources>
+		<extraconfig />
+		<blocks />
+	</global>
+</config>
