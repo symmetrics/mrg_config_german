@@ -12,13 +12,13 @@ package_dir = os.path.dirname(os.path.abspath(__file__))
 logger = logging.getLogger('symmetrics_config_german.pre_install')
 
 
-def _read_file_contents(filename, ext='.txt'):
+def _read_file_contents(filename, ext='.html'):
     fd = file(os.path.join(package_dir, filename + ext), 'r')
     content = fd.read()
     fd.close()
     return content
 
-def _write_file_contents(filename, content, ext='.txt'):
+def _write_file_contents(filename, content, ext='.html'):
     fd = file(os.path.join(package_dir, filename + ext), 'w')
     fd.write(content)
     fd.close()
@@ -54,8 +54,6 @@ def main(config_module, info_py):
         'text_ueberuns': _read_file_contents('ueber_uns'),
         'text_zahlung': _read_file_contents('zahlung'),
         'text_agb': _read_file_contents('agb'),
-        'http_url': 'http://' + magento['http_url'] + '/',
-        'https_url': 'https://' + magento['https_url'] + '/',
         'template': '', # TODO
         'shopname': magento['shop_name'],
         'meta_description': magento['meta_description'],

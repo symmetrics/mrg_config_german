@@ -2,79 +2,152 @@
 $installer = $this;
 $installer->startSetup();
 
+# agb's
+
 $query = <<< EOF
-
--- agb's
-
 DELETE FROM `checkout_agreement`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `checkout_agreement` (`agreement_id`, `name`, `content`, `content_height`, `checkbox_text`, `is_active`, `is_html`) VALUES
 (1, 'AGB', '${text_agb}', '', 'Hiermit werden die Allgemeinen Geschäftsbedingungen und die Widerrufsbelehrung akzeptiert.', 1, 1);
+EOF;
+$installer->run($query);
 
--- taxes
+# taxes
 
+$query = <<< EOF
 DELETE FROM `tax_calculation_rate`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `tax_calculation_rate` (`tax_calculation_rate_id`, `tax_country_id`, `tax_region_id`, `tax_postcode`, `code`, `rate`) VALUES
 (1, 'DE', 0, '*', 'Standard 19%', 19.0000),
 (2, 'DE', 0, '*', 'Ermäßigt 7%', 7.0000),
 (3, 'DE', 0, '*', 'Händler 0%', 0.0000);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `tax_calculation_rule`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `tax_calculation_rule` (`tax_calculation_rule_id`, `code`, `priority`, `position`) VALUES
 (1, 'Standard 19%', 0, 1),
 (2, 'Ermäßigt 7%', 0, 2),
 (3, 'Händler Standard 0%', 0, 3);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `tax_class`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `tax_class` (`class_id`, `class_name`, `class_type`) VALUES
 (1, 'Ermäßigt 7%', 'PRODUCT'),
 (2, 'Endkunde', 'CUSTOMER'),
 (3, 'Standard 19%', 'PRODUCT'),
 (4, 'Händler 0%', 'PRODUCT'),
 (5, 'Händler', 'CUSTOMER');
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `tax_calculation`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `tax_calculation` (`tax_calculation_rate_id`, `tax_calculation_rule_id`, `customer_tax_class_id`, `product_tax_class_id`) VALUES
 (1, 1, 2, 3),
 (2, 2, 2, 1),
 (3, 3, 5, 4);
+EOF;
+$installer->run($query);
 
--- customer groups
-
+$query = <<< EOF
 DELETE FROM `customer_group`;
+EOF;
+$installer->run($query);
+
+# customer groups
+
+$query = <<< EOF
 INSERT INTO `customer_group` (`customer_group_id`, `customer_group_code`, `tax_class_id`) VALUES
 (0, 'NOT LOGGED IN', 3),
 (1, 'Endkunde', 3),
 (3, 'Händler', 5);
+EOF;
+$installer->run($query);
 
--- customers
+# customers
 
+$query = <<< EOF
 DELETE FROM `customer_entity`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_entity` (`entity_id`, `entity_type_id`, `attribute_set_id`, `website_id`, `email`, `group_id`, `increment_id`, `store_id`, `created_at`, `updated_at`, `is_active`) VALUES
 (1, 1, 0, 1, 'endkunde@muster.de', 1, '000000001', 0, '2009-01-30 08:02:19', '2009-01-30 08:06:13', 1),
 (2, 1, 0, 1, 'haendler@muster.de', 3, '000000002', 0, '2009-01-30 08:03:13', '2009-01-30 08:08:18', 1);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_address_entity`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_address_entity` (`entity_id`, `entity_type_id`, `attribute_set_id`, `increment_id`, `parent_id`, `created_at`, `updated_at`, `is_active`) VALUES
 (1, 2, 0, '', 1, '2009-01-30 08:06:13', '2009-01-30 08:06:13', 1),
 (2, 2, 0, '', 1, '2009-01-30 08:06:13', '2009-01-30 08:06:13', 1),
 (3, 2, 0, '', 2, '2009-01-30 08:08:18', '2009-01-30 08:08:18', 1),
 (4, 2, 0, '', 2, '2009-01-30 08:08:18', '2009-01-30 08:08:18', 1);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_address_entity_int`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_address_entity_int` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
 (1, 2, 27, 1, 79),
 (2, 2, 27, 2, 79),
 (3, 2, 27, 3, 79),
 (4, 2, 27, 4, 79);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_address_entity_text`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_address_entity_text` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
 (1, 2, 23, 1, 'Musterstr. 1'),
 (2, 2, 23, 2, 'Musterstr. 1'),
 (3, 2, 23, 3, 'Geschäftstrasse 1'),
 (4, 2, 23, 4, 'Lieferstrasse 2');
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_address_entity_varchar`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_address_entity_varchar` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
 (1, 2, 17, 1, ''),
 (2, 2, 18, 1, 'Max'),
@@ -124,15 +197,29 @@ INSERT INTO `customer_address_entity_varchar` (`value_id`, `entity_type_id`, `at
 (46, 2, 28, 4, '30159'),
 (47, 2, 29, 4, '0511 123456'),
 (48, 2, 30, 4, '');
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_entity_int`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_entity_int` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
 (1, 1, 13, 1, 1),
 (2, 1, 14, 1, 2),
 (3, 1, 13, 2, 3),
 (4, 1, 14, 2, 4);
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 DELETE FROM `customer_entity_varchar`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `customer_entity_varchar` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
 (1, 1, 4, 1, ''),
 (2, 1, 5, 1, 'Max'),
@@ -150,10 +237,16 @@ INSERT INTO `customer_entity_varchar` (`value_id`, `entity_type_id`, `attribute_
 (14, 1, 12, 2, '8df1934676146792dde7f3383831e711:SC'),
 (15, 1, 15, 2, ''),
 (16, 1, 3, 2, 'Admin');
+EOF;
+$installer->run($query);
 
--- cms pages
-
+# cms pages
+$query = <<< EOF
 DELETE FROM `cms_page`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `meta_description`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_theme_from`, `custom_theme_to`) VALUES
 (1, 'Seite nicht gefunden', 'two_columns_right', 'Page keywords', 'Page description', 'not-found', '${text_pagenotfound}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (2, 'Startseite', 'two_columns_right', '', '', 'home', '${text_home}', '${datetime}', '${datetime}', 1, 0, '<!--<reference name="content">\r\n<block type="catalog/product_new" name="home.catalog.product.new" alias="product_new" template="catalog/product/new.phtml" after="cms_page"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_compared" name="home.reports.product.compared" template="reports/home_product_compared.phtml" after="product_viewed"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n</reference><reference name="right">\r\n<action method="unsetChild"><alias>right.reports.product.viewed</alias></action>\r\n<action method="unsetChild"><alias>right.reports.product.compared</alias></action>\r\n</reference>-->', '', NULL, NULL),
@@ -163,16 +256,30 @@ INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `m
 (6, 'Zahlung und Versand', 'one_column', '', '', 'payment-shipping', '${text_zahlung}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (7, 'Widerrufsbelehrung', 'one_column', '', '', 'widerrufsbelehrung', '<h2>Widerrufsbelehrung</h2>\r\n\r\n<h3>Widerrufsrecht</h3>\r\n\r\n<p>Sie können Ihre Vertragserklärung innerhalb von zwei Wochen ohne Angabe von Gründen in Textform (z. B. Brief, Fax, E-Mail) oder - wenn Ihnen die Sache vor Fristablauf überlassen wird - durch Rücksendung der Sache widerrufen. Die Frist beginnt nach Erhalt dieser Belehrung in Textform, jedoch nicht vor Eingang der Ware beim Empfänger (bei der wiederkehrenden Lieferung gleichartiger Waren nicht vor dem Eingang der ersten Teillieferung) und auch nicht vor Erfüllung unserer Informationspflichten gemäß § 312c Abs. 2 BGB in Verbindung mit § 1 Abs. 1, 2 und 4 BGB-InfoV sowie unserer Pflichten gemäß § 312e Abs. 1 Satz 1 BGB in Verbindung mit § 3 BGB-InfoV. Zur Wahrung der Widerrufsfrist genügt die rechtzeitige Absendung des Widerrufs oder der Sache. Der Widerruf ist zu richten an:</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="address"}}</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="communication"}}</p>\r\n\r\n<h3>Widerrufsfolgen</h3>\r\n\r\n<p>Im Falle eines wirksamen Widerrufs sind die beiderseits empfangenen Leistungen zurückzugewähren und ggf. gezogene Nutzungen (z. B. Zinsen) herauszugeben. Können Sie uns die empfangene Leistung ganz oder teilweise nicht oder nur in verschlechtertem Zustand zurückgewähren, müssen Sie uns insoweit ggf. Wertersatz leisten. Bei der Überlassung von Sachen gilt dies nicht, wenn die Verschlechterung der Sache ausschließlich auf deren Prüfung - wie sie Ihnen etwa im Ladengeschäft möglich gewesen wäre - zurückzuführen ist. Im Übrigen können Sie die Pflicht zum Wertersatz für eine durch die bestimmungsgemäße Ingebrauchnahme der Sache entstandene Verschlechterung vermeiden, indem Sie die Sache nicht wie Ihr Eigentum in Gebrauch nehmen und alles unterlassen, was deren Wert beeinträchtigt.</p>\r\n<p>Paketversandfähige Sachen sind auf unsere Gefahr zurückzusenden. Sie haben die Kosten der Rücksendung zu tragen, wenn die gelieferte Ware der bestellten entspricht und wenn der Preis der zurückzusendenden Sache einen Betrag von 40 Euro nicht übersteigt oder wenn Sie bei einem höheren Preis der Sache zum Zeitpunkt des Widerrufs noch nicht die Gegenleistung oder eine vertraglich vereinbarte Teilzahlung erbracht haben. Anderenfalls ist die Rücksendung für Sie kostenfrei. Nicht paketversandfähige Sachen werden bei Ihnen abgeholt. Verpflichtungen zur Erstattung von Zahlungen müssen innerhalb von 30 Tagen erfüllt werden. Die Frist beginnt für Sie mit der Absendung Ihrer Widerrufserklärung oder der Sache, für uns mit deren Empfang.</p>', '2009-02-23 19:59:38', '2009-02-23 19:59:54', 1, 0, '', '', NULL, NULL),
 (8, 'Datenschutz', 'one_column', '', '', 'datenschutz', '<h2>Datenschutz</h2>\r\n\r\n<p>Die {{block type="symmetrics_impressum/impressum" value="company1"}} nimmt den Schutz personenbezogener Daten sehr ernst. Wir möchten, dass Sie wissen, wann wir welche Daten speichern und wie wir sie verwenden. Als privatrechtliches Unternehmen unterliegen wir den Bestimmungen des Bundesdatenschutzgesetzes (BDSG). Wir haben technische und organisatorische Maßnahmen getroffen, die sicherstellen, dass die Vorschriften über den Datenschutz sowohl von uns als auch von externen Dienstleistern beachtet werden.</p>\r\n\r\n<h3>Datenschutzhinweis</h3>\r\n\r\n<p>Ihre E-Mail-Adresse wird nicht an andere Unternehmen weiter gegeben. Wir verwenden die von Ihnen mitgeteilten Daten zur Erfüllung und Abwicklung Ihrer Bestellung. Bei Anmeldung zum Newsletter wird Ihre E-Mail-Adresse mit Ihrer Einwilligung für eigene Werbezwecke genutzt, bis Sie sich vom Newsletter abmelden.</p>\r\n<p>Der Widerruf ist zu richten an:</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="address"}}</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="communication"}}</p>\r\n\r\n<h3>Einsatz von Cookies</h3>\r\n\r\n<p>Ein "Cookie" ist eine kleine Datendatei, die von uns auf Ihren Computers übertragen wird, wenn Sie auf unserer Site surfen. Ein Cookie kann nur Informationen enthalten, die wir selbst an Ihren Rechner senden – private Daten lassen sich damit nicht auslesen. Wenn Sie die Cookies auf unserer Site akzeptieren, haben wir keinen Zugriff auf Ihre persönlichen Informationen, aber mit Hilfe der Cookies können wir Ihren Computer identifizieren. </p>\r\n<p>Wir verwenden Cookies: Sie verbleiben nicht auf Ihrem Computer. Verlassen Sie unsere Seiten, wird auch der temporäre Cookie nach einer Stunde verworfen. Mit Hilfe der zusammengetragenen Informationen können wir Nutzungsmuster und -strukturen unserer Website analysieren. Auf diese Weise können wir unsere Website immer weiter optimieren, indem wir den Inhalt oder die Personalisierung verbessern und die Nutzung vereinfachen.</p>\r\n<p>Wir verwenden Cookies damit Sie den Warenkorb während Ihrer Sitzung mit Bestellungen auffüllen und verwalten können. Um den Warenkorb nutzen zu können müssen die temporären Cookies zugelassen werden. </p>\r\n\r\n<h3>Kinder</h3>\r\n<p>Personen unter 18 Jahren sollten ohne Zustimmung der Eltern oder Erziehungsberechtigten keine personenbezogenen Daten an uns übermitteln. Wir fordern keine personenbezogenen Daten von Kindern an, sammeln diese nicht und geben sie nicht an Dritte weiter. </p>\r\n\r\n<h3>Fragen und Kommentare</h3>\r\n<p>Nach dem Bundesdatenschutzgesetz haben Sie ein Recht auf unentgeltliche Auskunft über Ihre gespeicherten Daten sowie ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Für Fragen, Anregungen oder Kommentare zum Thema Datenschutz wenden Sie sich bitte per E-Mail an {{block type="symmetrics_impressum/impressum" value="email"}}.</p>', '2009-02-23 20:04:20', '2009-02-23 20:04:46', 1, 0, '', '', NULL, NULL);
+EOF;
+$installer->run($query);
 
--- footer links
+# footer links
 
+$query = <<< EOF
 DELETE FROM `cms_block`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`) VALUES
 (1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}about-us">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB - Rückgaberecht</a></li>\r\n<li><a href="{{store url=""}}widerrufsbelehrung">Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}payment-shipping">Zahlung und Versand</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
+EOF;
+$installer->run($query);
 
--- email templates
+# email templates
 
+$query = <<< EOF
 DELETE FROM `core_email_template`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `core_email_template` (`template_id`, `template_code`, `template_text`, `template_type`, `template_subject`, `template_sender_name`, `template_sender_email`, `added_at`, `modified_at`) VALUES
 (5, 'Neues Admin-Passwort (Template)', '<style type="text/css">\r\n           body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }\r\n      </style>\r\n\r\n        <div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n         <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n             <tr>\r\n                    <td align="center" valign="top">\r\n                    <!-- [ header starts here] -->\r\n                      <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n                          <tr>\r\n                                <td valign="top">\r\n                                 <p><a href="{{store url=""}}" style="color:#1E7EC8;"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento" border="0"/></a></p></td>\r\n                            </tr>\r\n                       </table>\r\n\r\n                    <!-- [ middle starts here] -->\r\n                      <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n                          <tr>\r\n                                <td valign="top">\r\n                             <p><strong>Dear, {{var user.name}}</strong>,<br/>\r\n                               Your new password is: {{var password}}</p>\r\n                                                               <p>You can change your password at any time by logging into <a href="{{store url="adminhtml/system_account/"}}" style="color:#1E7EC8;">your account</a>.<p>\r\n\r\n                                <p>Thank you again,<br/><strong>Magento Demo Store</strong></p>\r\n\r\n\r\n                             </td>\r\n                           </tr>\r\n                       </table>\r\n\r\n                    </td>\r\n               </tr>\r\n           </table>\r\n            </div>', 2, 'New password for {{var user.name}}', NULL, NULL, '2009-02-01 17:27:50', '2009-02-01 17:27:50'),
 (6, 'Währung Aktualisierung (Template)', 'Currency update warnings:\r\n\r\n\r\n{{var warnings}}', 1, 'Currency Update Warnings', NULL, NULL, '2009-02-01 17:28:18', '2009-02-01 17:28:18'),
@@ -189,7 +296,10 @@ INSERT INTO `core_email_template` (`template_id`, `template_code`, `template_tex
 (17, 'Rechnung Aktualisierung (Template)', '<style type="text/css">body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }</style>\r\n<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n<tr>\r\n    <td align="center" valign="top">\r\n        <!-- [ header starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>\r\n        </tr>\r\n        </table>\r\n\r\n        <!-- [ middle starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top">\r\n                <p>\r\n                    <strong>Dear {{var order.getCustomerName()}}</strong>,<br/>\r\n                    Your order # {{var order.increment_id}} has been <br/>\r\n                    <strong>{{var order.getStatusLabel()}}</strong>.\r\n                </p>\r\n                <p>You can check the status of your order by <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">logging into your account</a>.</p>\r\n                <p>{{var comment}}</p>\r\n                <p>\r\n                    If you have any questions, please feel free to contact us at\r\n                    <a href="mailto:magento@varien.com" style="color:#1E7EC8;">dummyemail@magentocommerce.com</a> \r\n                    or by phone at (555) 555-0123.\r\n                </p>\r\n                <p>Thank you again,<br/><strong>{{var order.getStoreGroupName()}}</strong></p>\r\n            </td>\r\n        </tr>\r\n        </table>\r\n    </td>\r\n</tr>\r\n</table>\r\n</div>', 2, '{{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} update', NULL, NULL, '2009-02-01 17:31:54', '2009-02-01 17:31:54'),
 (18, 'Rechnung Aktualisierung Gast (Template)', '<style type="text/css">body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }</style>\r\n<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n<tr>\r\n    <td align="center" valign="top">\r\n        <!-- [ header starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>\r\n        </tr>\r\n        </table>\r\n\r\n        <!-- [ middle starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top">\r\n                <p>\r\n                    <strong>Dear {{var billing.getName()}}</strong>,<br/>\r\n                    Your order # {{var order.increment_id}} has been <br/>\r\n                    <strong>{{var order.getStatusLabel()}}</strong>.\r\n                </p>\r\n                <p>{{var comment}}</p>\r\n                <p>\r\n                    If you have any questions, please feel free to contact us at\r\n                    <a href="mailto:magento@varien.com" style="color:#1E7EC8;">dummyemail@magentocommerce.com</a> \r\n                    or by phone at (555) 555-0123.\r\n                </p>\r\n                <p>Thank you again,<br/><strong>{{var order.getStoreGroupName()}}</strong></p>\r\n            </td>\r\n        </tr>\r\n        </table>\r\n    </td>\r\n</tr>\r\n</table>\r\n</div>', 2, '{{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} update', NULL, NULL, '2009-02-01 17:32:13', '2009-02-01 17:32:13'),
 (19, 'Neue Gutschrift (Template)', '<style type="text/css">\r\n    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }\r\n</style>\r\n\r\n<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n<tr>\r\n    <td align="center" valign="top">\r\n        <!-- [ header starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n            <tr>\r\n                <td valign="top"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>\r\n            </tr>\r\n        </table>\r\n        <!-- [ middle starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n            <tr>\r\n                <td valign="top">\r\n                    <p>\r\n                        <strong>Hello {{var order.getCustomerName()}}</strong>,<br/>\r\n                        Thank you for your order from {{var order.getStoreGroupName()}}.\r\n                        You can check the status of your order by <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">logging into your account</a>.\r\n                        If you have any questions about your order please contact us at <a href="mailto:dummyemail@magentocommerce.com" style="color:#1E7EC8;">dummyemail@magentocommerce.com</a> or call us at <span class="nobr">(555) 555-0123</span> Monday - Friday, 8am - 5pm PST.\r\n                    </p>\r\n                    <h3 style="border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; ">\r\n                        Your Credit Memo #{{var creditmemo.increment_id}} for Order #{{var order.increment_id}}\r\n                    </h3>\r\n                    <table cellspacing="0" cellpadding="0" border="0" width="100%">\r\n                        <thead>\r\n                        <tr>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Billing Information:</th>\r\n                            <th width="3%"></th>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Payment Method:</th>\r\n                        </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                        <tr>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.billing_address.format(''html'')}}\r\n                            </td>\r\n                            <td>&nbsp;</td>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var payment_html}}\r\n                            </td>\r\n                        </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <br/>\r\n                    {{depend order.getIsNotVirtual()}}\r\n                    <table cellspacing="0" cellpadding="0" border="0" width="100%">\r\n                        <thead>\r\n                        <tr>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Shipping Information:</th>\r\n                            <th width="3%"></th>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Shipping Method:</th>\r\n                        </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                        <tr>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.shipping_address.format(''html'')}}\r\n                                &nbsp;\r\n                            </td>\r\n                            <td>&nbsp;</td>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.shipping_description}}\r\n                                &nbsp;\r\n                            </td>\r\n                        </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <br/>\r\n                    {{/depend}}\r\n\r\n                    {{layout handle="sales_email_order_creditmemo_items" creditmemo=\$creditmemo order=\$order}}\r\n\r\n                    <p>{{var comment}}</p>\r\n                    <p>\r\n                        Thank you again,<br/><strong>{{var order.getStoreGroupName()}}</strong>\r\n                    </p>\r\n                </td>\r\n            </tr>\r\n        </table>\r\n    </td>\r\n</tr>\r\n</table>\r\n</div>', 2, '{{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} for Order # {{var order.increment_id}}', NULL, NULL, '2009-02-01 17:33:09', '2009-02-01 17:33:09');
+EOF;
+$installer->run($query);
 
+$query = <<< EOF
 INSERT INTO `core_email_template` (`template_id`, `template_code`, `template_text`, `template_type`, `template_subject`, `template_sender_name`, `template_sender_email`, `added_at`, `modified_at`) VALUES
 (20, 'Neue Gutschrift Gast (Template)', '<style type="text/css">\r\n    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }\r\n</style>\r\n\r\n<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n<tr>\r\n    <td align="center" valign="top">\r\n        <!-- [ header starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n            <tr>\r\n                <td valign="top"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>\r\n            </tr>\r\n        </table>\r\n        <!-- [ middle starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n            <tr>\r\n                <td valign="top">\r\n                    <p>\r\n                        <strong>Hello {{var billing.getName()}}</strong>,<br/>\r\n                        Thank you for your order from {{var order.getStoreGroupName()}}.\r\n                        If you have any questions about your order please contact us at <a href="mailto:dummyemail@magentocommerce.com" style="color:#1E7EC8;">dummyemail@magentocommerce.com</a> or call us at <span class="nobr">(555) 555-0123</span> Monday - Friday, 8am - 5pm PST.\r\n                    </p>\r\n                    <h3 style="border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; ">\r\n                        Your Credit Memo #{{var creditmemo.increment_id}} for Order #{{var order.increment_id}}\r\n                    </h3>\r\n                    <table cellspacing="0" cellpadding="0" border="0" width="100%">\r\n                        <thead>\r\n                        <tr>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Billing Information:</th>\r\n                            <th width="3%"></th>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Payment Method:</th>\r\n                        </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                        <tr>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.billing_address.format(''html'')}}\r\n                            </td>\r\n                            <td>&nbsp;</td>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var payment_html}}\r\n                            </td>\r\n                        </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <br/>\r\n                    {{depend order.getIsNotVirtual()}}\r\n                    <table cellspacing="0" cellpadding="0" border="0" width="100%">\r\n                        <thead>\r\n                        <tr>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Shipping Information:</th>\r\n                            <th width="3%"></th>\r\n                            <th align="left" width="48.5%" bgcolor="#d9e5ee" style="padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Shipping Method:</th>\r\n                        </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                        <tr>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.shipping_address.format(''html'')}}\r\n                                &nbsp;\r\n                            </td>\r\n                            <td>&nbsp;</td>\r\n                            <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">\r\n                                {{var order.shipping_description}}\r\n                                &nbsp;\r\n                            </td>\r\n                        </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <br/>\r\n                    {{/depend}}\r\n\r\n                    {{layout handle="sales_email_order_creditmemo_items" creditmemo=\$creditmemo order=\$order}}\r\n\r\n                    <p>{{var comment}}</p>\r\n                    <p>\r\n                        Thank you again,<br/><strong>{{var order.getStoreGroupName()}}</strong>\r\n                    </p>\r\n                </td>\r\n            </tr>\r\n        </table>\r\n    </td>\r\n</tr>\r\n</table>\r\n</div>', 2, '{{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} for Order # {{var order.increment_id}}', NULL, NULL, '${datetime}', '${datetime}'),
 (21, 'Gutschrift Aktualisierung (Template)', '<style type="text/css">body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }</style>\r\n<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">\r\n<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">\r\n<tr>\r\n    <td align="center" valign="top">\r\n        <!-- [ header starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area=''frontend''}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>\r\n        </tr>\r\n        </table>\r\n\r\n        <!-- [ middle starts here] -->\r\n        <table cellspacing="0" cellpadding="0" border="0" width="650">\r\n        <tr>\r\n            <td valign="top">\r\n                <p>\r\n                    <strong>Dear {{var order.getCustomerName()}}</strong>,<br/>\r\n                    Your order # {{var order.increment_id}} has been <br/>\r\n                    <strong>{{var order.getStatusLabel()}}</strong>.\r\n                </p>\r\n                <p>You can check the status of your order by <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">logging into your account</a>.</p>\r\n                <p>{{var comment}}</p>\r\n                <p>\r\n                    If you have any questions, please feel free to contact us at\r\n                    <a href="mailto:magento@varien.com" style="color:#1E7EC8;">dummyemail@magentocommerce.com</a> \r\n                    or by phone at (555) 555-0123.\r\n                </p>\r\n                <p>Thank you again,<br/><strong>{{var order.getStoreGroupName()}}</strong></p>\r\n            </td>\r\n        </tr>\r\n        </table>\r\n    </td>\r\n</tr>\r\n</table>\r\n</div>', 2, '{{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} update', NULL, NULL, '${datetime}', '${datetime}'),
@@ -210,19 +320,14 @@ INSERT INTO `core_email_template` (`template_id`, `template_code`, `template_tex
 (36, 'Produkt wieder verfügbar (Template)', 'Hello {{var customerName}},\r\n\r\n{{var alertGrid}}', 2, 'Products back in stock alert', NULL, NULL, '${datetime}', '${datetime}'),
 (37, 'Produkt Preisänderung (Template)', 'Hello {{var customerName}},\r\n\r\n{{var alertGrid}}', 2, 'Products price changed alert', NULL, NULL, '${datetime}', '${datetime}'),
 (38, 'Produkt Cron Fehler (Template)', 'Product alerts cron warnings:\r\n\r\n{{var warnings}}', 2, 'Product alerts Cron error', NULL, NULL, '${datetime}', '${datetime}');
+EOF;
+$installer->run($query);
 
--- configuration
+# configuration
 
+$query = <<< EOF
 INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'catalog/category/root_id', '2'),
-('default', 0, 'web/seo/use_rewrites', '1'),
-('default', 0, 'web/unsecure/base_url', '${http_url}'),
-('default', 0, 'web/secure/base_url', '${https_url}'),
-('default', 0, 'general/locale/code', 'de_DE'),
-('default', 0, 'general/locale/timezone', 'Europe/Berlin'),
-('default', 0, 'currency/options/base', 'EUR'),
-('default', 0, 'currency/options/default', 'EUR'),
-('default', 0, 'currency/options/allow', 'EUR'),
 ('default', 0, 'general/country/default', 'DE'),
 ('default', 0, 'general/country/allow', 'DE'),
 ('default', 0, 'general/locale/firstday', '1'),
@@ -259,7 +364,6 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'trans_email/ident_general/name', '${company}'),
 ('default', 0, 'trans_email/ident_general/email', '${email}'),
 ('default', 0, 'trans_email/ident_sales/name', 'Shop Verkaufsabteilung'),
-('default', 0, 'trans_email/ident_sales/email', '${email_sales}'),
 ('default', 0, 'trans_email/ident_sales/email', '${email_sales}'),
 ('default', 0, 'trans_email/ident_support/name', 'Kundenbetreuung'),
 ('default', 0, 'trans_email/ident_support/email', '${email_support}'),
@@ -369,7 +473,6 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'sales_email/order/guest_template', '12'),
 ('default', 0, 'sales_email/order/copy_to', ''),
 ('default', 0, 'sales_email/order/copy_method', 'bcc'),
-('default', 0, 'sales_email/order_comment/enabled', '1'),
 ('default', 0, 'sales_email/order_comment/enabled', '1'),
 ('default', 0, 'sales_email/order_comment/identity', 'sales'),
 ('default', 0, 'sales_email/order_comment/template', '13'),
@@ -509,9 +612,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'sales/identity/logo', 'default/logo.jpg'),
 ('default', 0, 'general/impressum/bankaccountowner', '${bank_account_owner}'),
 ('default', 0, 'sales_pdf/invoice/customeridprefix', '${invoice_customerprefix}');
-
 EOF;
-
 $installer->run($query);
 
 $installer->endSetup();
