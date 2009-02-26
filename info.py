@@ -6,9 +6,9 @@ tags = ('magento', 'config', 'german', 'symmetrics')
 
 # relations
 requires = {
-    'magento': '*'
-    'symmetrics_module_impressum',
-    'symmetrics_module_invoicepdf'
+    'magento': '*',
+    'symmetrics_module_impressum': '*',
+    'symmetrics_module_invoicepdf': '*',
 }
 excludes = {
 }
