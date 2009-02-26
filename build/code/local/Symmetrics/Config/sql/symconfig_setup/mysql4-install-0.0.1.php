@@ -259,6 +259,24 @@ INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `m
 EOF;
 $installer->run($query);
 
+$query = <<< EOF
+DELETE FROM `cms_page_store`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
+INSERT INTO `cms_page_store` (`page_id`, `store_id`) VALUES
+(1, 0),
+(2, 0),
+(3, 0),
+(4, 0),
+(5, 0),
+(6, 0),
+(7, 0),
+(8, 0);
+EOF;
+$installer->run($query);
+
 # footer links
 
 $query = <<< EOF
@@ -269,6 +287,17 @@ $installer->run($query);
 $query = <<< EOF
 INSERT INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`) VALUES
 (1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}about-us">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB - Rückgaberecht</a></li>\r\n<li><a href="{{store url=""}}widerrufsbelehrung">Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}payment-shipping">Zahlung und Versand</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
+DELETE FROM `cms_block_store`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
+INSERT INTO `cms_block_store` (`block_id`, `store_id`) VALUES
+(1, 0);
 EOF;
 $installer->run($query);
 
