@@ -9,6 +9,7 @@ requires = {
     'magento': '*',
     'symmetrics_module_impressum': '*',
     'symmetrics_module_invoicepdf': '*',
+    'mc_module_Locale_Mage_community_de_DE': '*',
 }
 excludes = {
 }
