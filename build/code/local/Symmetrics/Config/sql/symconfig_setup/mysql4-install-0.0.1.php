@@ -250,7 +250,7 @@ $query = <<< EOF
 INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `meta_description`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_theme_from`, `custom_theme_to`) VALUES
 (1, 'Seite nicht gefunden', 'two_columns_right', 'Page keywords', 'Page description', 'not-found', '${text_pagenotfound}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (2, 'Startseite', 'two_columns_right', '', '', 'home', '${text_home}', '${datetime}', '${datetime}', 1, 0, '<!--<reference name="content">\r\n<block type="catalog/product_new" name="home.catalog.product.new" alias="product_new" template="catalog/product/new.phtml" after="cms_page"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_compared" name="home.reports.product.compared" template="reports/home_product_compared.phtml" after="product_viewed"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n</reference><reference name="right">\r\n<action method="unsetChild"><alias>right.reports.product.viewed</alias></action>\r\n<action method="unsetChild"><alias>right.reports.product.compared</alias></action>\r\n</reference>-->', '', NULL, NULL),
-(3, 'AGB / Rückgaberecht', 'one_column', '', '', 'agb', '${text_rueckgabe}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
+(3, 'AGB / Rückgaberecht', 'one_column', '', '', 'agb', '${text_agb}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (4, 'Impressum', 'one_column', '', '', 'impressum', '<h2>Impressum</h2>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="address"}}\r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="communication"}}\r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="legal"}}\r\n</p>\r\n\r\n<p>\r\nInhaltlich verantwortlich gemäß § 5 TMG ist {{block type="symmetrics_impressum/impressum" value="ceo"}}, Kontaktdaten siehe oben. \r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="tax"}}\r\n</p>\r\n\r\n<h3>Bankverbindung</h3>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="bank"}}\r\n</p>', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (5, 'Über uns', 'one_column', '', '', 'about-us', '${text_ueberuns}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (6, 'Zahlung und Versand', 'one_column', '', '', 'payment-shipping', '${text_zahlung}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
@@ -355,6 +355,11 @@ $installer->run($query);
 # configuration
 
 $query = <<< EOF
+DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
 INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'catalog/category/root_id', '2'),
 ('default', 0, 'general/country/default', 'DE'),
@@ -364,7 +369,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'design/package/name', 'default'),
 ('default', 0, 'design/package/ua_regexp', 'a:0:{}'),
 ('default', 0, 'design/theme/locale', ''),
-('default', 0, 'design/theme/template', '${template}'),
+('default', 0, 'design/theme/template', ''),
 ('default', 0, 'design/theme/template_ua_regexp', 'a:0:{}'),
 ('default', 0, 'design/theme/skin', ''),
 ('default', 0, 'design/theme/skin_ua_regexp', 'a:0:{}'),
@@ -391,7 +396,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'design/watermark/thumbnail_size', ''),
 ('default', 0, 'design/watermark/thumbnail_position', 'stretch'),
 ('default', 0, 'trans_email/ident_general/name', '${company}'),
-('default', 0, 'trans_email/ident_general/email', '${email}'),
+('default', 0, 'trans_email/ident_general/email', '${email_general}'),
 ('default', 0, 'trans_email/ident_sales/name', 'Shop Verkaufsabteilung'),
 ('default', 0, 'trans_email/ident_sales/email', '${email_sales}'),
 ('default', 0, 'trans_email/ident_support/name', 'Kundenbetreuung'),
@@ -633,6 +638,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'general/impressum/bankname', '${bank_connection}'),
 ('default', 0, 'general/impressum/swift', '${swift}'),
 ('default', 0, 'general/impressum/iban', '${iban}'),
+('default', 0, 'general/impressum/shopname', '${shopname}'),
 ('default', 0, 'sales_pdf/invoice/put_order_id', '1'),
 ('default', 0, 'sales_pdf/invoice/maturity', '${invoice_maturity}'),
 ('default', 0, 'sales_pdf/invoice/note', '${invoice_note}'),
