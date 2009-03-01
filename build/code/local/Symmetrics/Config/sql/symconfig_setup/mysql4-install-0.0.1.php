@@ -86,161 +86,8 @@ INSERT INTO `customer_group` (`customer_group_id`, `customer_group_code`, `tax_c
 EOF;
 $installer->run($query);
 
-# customers
-
-$query = <<< EOF
-DELETE FROM `customer_entity`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_entity` (`entity_id`, `entity_type_id`, `attribute_set_id`, `website_id`, `email`, `group_id`, `increment_id`, `store_id`, `created_at`, `updated_at`, `is_active`) VALUES
-(1, 1, 0, 1, 'endkunde@muster.de', 1, '000000001', 0, '2009-01-30 08:02:19', '2009-01-30 08:06:13', 1),
-(2, 1, 0, 1, 'haendler@muster.de', 3, '000000002', 0, '2009-01-30 08:03:13', '2009-01-30 08:08:18', 1);
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_address_entity`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_address_entity` (`entity_id`, `entity_type_id`, `attribute_set_id`, `increment_id`, `parent_id`, `created_at`, `updated_at`, `is_active`) VALUES
-(1, 2, 0, '', 1, '2009-01-30 08:06:13', '2009-01-30 08:06:13', 1),
-(2, 2, 0, '', 1, '2009-01-30 08:06:13', '2009-01-30 08:06:13', 1),
-(3, 2, 0, '', 2, '2009-01-30 08:08:18', '2009-01-30 08:08:18', 1),
-(4, 2, 0, '', 2, '2009-01-30 08:08:18', '2009-01-30 08:08:18', 1);
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_address_entity_int`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_address_entity_int` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
-(1, 2, 27, 1, 79),
-(2, 2, 27, 2, 79),
-(3, 2, 27, 3, 79),
-(4, 2, 27, 4, 79);
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_address_entity_text`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_address_entity_text` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
-(1, 2, 23, 1, 'Musterstr. 1'),
-(2, 2, 23, 2, 'Musterstr. 1'),
-(3, 2, 23, 3, 'Geschäftstrasse 1'),
-(4, 2, 23, 4, 'Lieferstrasse 2');
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_address_entity_varchar`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_address_entity_varchar` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
-(1, 2, 17, 1, ''),
-(2, 2, 18, 1, 'Max'),
-(3, 2, 19, 1, ''),
-(4, 2, 20, 1, 'Endkunde'),
-(5, 2, 21, 1, ''),
-(6, 2, 22, 1, ''),
-(7, 2, 24, 1, 'Hannover'),
-(8, 2, 25, 1, 'DE'),
-(9, 2, 26, 1, 'Niedersachsen'),
-(10, 2, 28, 1, '30159'),
-(11, 2, 29, 1, '0511 123456'),
-(12, 2, 30, 1, ''),
-(13, 2, 17, 2, ''),
-(14, 2, 18, 2, 'Max'),
-(15, 2, 19, 2, ''),
-(16, 2, 20, 2, 'Endkunde'),
-(17, 2, 21, 2, ''),
-(18, 2, 22, 2, ''),
-(19, 2, 24, 2, 'Hannover'),
-(20, 2, 25, 2, 'DE'),
-(21, 2, 26, 2, 'Niedersachsen'),
-(22, 2, 28, 2, '30159'),
-(23, 2, 29, 2, '0511 123456'),
-(24, 2, 30, 2, ''),
-(25, 2, 17, 3, ''),
-(26, 2, 18, 3, 'Petra'),
-(27, 2, 19, 3, ''),
-(28, 2, 20, 3, 'Händler'),
-(29, 2, 21, 3, ''),
-(30, 2, 22, 3, 'Muster GmbH'),
-(31, 2, 24, 3, 'Hannover'),
-(32, 2, 25, 3, 'DE'),
-(33, 2, 26, 3, 'Niedersachsen'),
-(34, 2, 28, 3, '30159'),
-(35, 2, 29, 3, '0511 123456'),
-(36, 2, 30, 3, '0511 654321'),
-(37, 2, 17, 4, ''),
-(38, 2, 18, 4, 'Petra'),
-(39, 2, 19, 4, ''),
-(40, 2, 20, 4, 'Händler'),
-(41, 2, 21, 4, ''),
-(42, 2, 22, 4, 'Muster GmbH'),
-(43, 2, 24, 4, 'Hannover'),
-(44, 2, 25, 4, 'DE'),
-(45, 2, 26, 4, 'Niedersachsen'),
-(46, 2, 28, 4, '30159'),
-(47, 2, 29, 4, '0511 123456'),
-(48, 2, 30, 4, '');
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_entity_int`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_entity_int` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
-(1, 1, 13, 1, 1),
-(2, 1, 14, 1, 2),
-(3, 1, 13, 2, 3),
-(4, 1, 14, 2, 4);
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_entity_varchar`;
-EOF;
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO `customer_entity_varchar` (`value_id`, `entity_type_id`, `attribute_id`, `entity_id`, `value`) VALUES
-(1, 1, 4, 1, ''),
-(2, 1, 5, 1, 'Max'),
-(3, 1, 6, 1, ''),
-(4, 1, 7, 1, 'Endkunde'),
-(5, 1, 8, 1, ''),
-(6, 1, 12, 1, 'd3a2341b35113905cf21aa830aec04b6:je'),
-(7, 1, 15, 1, ''),
-(8, 1, 3, 1, 'Admin'),
-(9, 1, 4, 2, ''),
-(10, 1, 5, 2, 'Petra'),
-(11, 1, 6, 2, ''),
-(12, 1, 7, 2, 'Händler'),
-(13, 1, 8, 2, ''),
-(14, 1, 12, 2, '8df1934676146792dde7f3383831e711:SC'),
-(15, 1, 15, 2, ''),
-(16, 1, 3, 2, 'Admin');
-EOF;
-$installer->run($query);
-
 # cms pages
+
 $query = <<< EOF
 DELETE FROM `cms_page`;
 EOF;
@@ -250,12 +97,11 @@ $query = <<< EOF
 INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `meta_description`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_theme_from`, `custom_theme_to`) VALUES
 (1, 'Seite nicht gefunden', 'two_columns_right', 'Page keywords', 'Page description', 'not-found', '${text_pagenotfound}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (2, 'Startseite', 'two_columns_right', '', '', 'home', '${text_home}', '${datetime}', '${datetime}', 1, 0, '<!--<reference name="content">\r\n<block type="catalog/product_new" name="home.catalog.product.new" alias="product_new" template="catalog/product/new.phtml" after="cms_page"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n<block type="reports/product_compared" name="home.reports.product.compared" template="reports/home_product_compared.phtml" after="product_viewed"><action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action></block>\r\n</reference><reference name="right">\r\n<action method="unsetChild"><alias>right.reports.product.viewed</alias></action>\r\n<action method="unsetChild"><alias>right.reports.product.compared</alias></action>\r\n</reference>-->', '', NULL, NULL),
-(3, 'AGB / Rückgaberecht', 'one_column', '', '', 'agb', '${text_agb}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
-(4, 'Impressum', 'one_column', '', '', 'impressum', '<h2>Impressum</h2>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="address"}}\r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="communication"}}\r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="legal"}}\r\n</p>\r\n\r\n<p>\r\nInhaltlich verantwortlich gemäß § 5 TMG ist {{block type="symmetrics_impressum/impressum" value="ceo"}}, Kontaktdaten siehe oben. \r\n</p>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="tax"}}\r\n</p>\r\n\r\n<h3>Bankverbindung</h3>\r\n\r\n<p>\r\n{{block type="symmetrics_impressum/impressum" value="bank"}}\r\n</p>', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
+(3, 'AGB / Widerrufsbelehrung', 'one_column', '', '', 'agb', '${text_agb}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
+(4, 'Impressum', 'one_column', '', '', 'impressum', '${text_impressum}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (5, 'Über uns', 'one_column', '', '', 'about-us', '${text_ueberuns}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (6, 'Zahlung und Versand', 'one_column', '', '', 'payment-shipping', '${text_zahlung}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
-(7, 'Widerrufsbelehrung', 'one_column', '', '', 'widerrufsbelehrung', '<h2>Widerrufsbelehrung</h2>\r\n\r\n<h3>Widerrufsrecht</h3>\r\n\r\n<p>Sie können Ihre Vertragserklärung innerhalb von zwei Wochen ohne Angabe von Gründen in Textform (z. B. Brief, Fax, E-Mail) oder - wenn Ihnen die Sache vor Fristablauf überlassen wird - durch Rücksendung der Sache widerrufen. Die Frist beginnt nach Erhalt dieser Belehrung in Textform, jedoch nicht vor Eingang der Ware beim Empfänger (bei der wiederkehrenden Lieferung gleichartiger Waren nicht vor dem Eingang der ersten Teillieferung) und auch nicht vor Erfüllung unserer Informationspflichten gemäß § 312c Abs. 2 BGB in Verbindung mit § 1 Abs. 1, 2 und 4 BGB-InfoV sowie unserer Pflichten gemäß § 312e Abs. 1 Satz 1 BGB in Verbindung mit § 3 BGB-InfoV. Zur Wahrung der Widerrufsfrist genügt die rechtzeitige Absendung des Widerrufs oder der Sache. Der Widerruf ist zu richten an:</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="address"}}</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="communication"}}</p>\r\n\r\n<h3>Widerrufsfolgen</h3>\r\n\r\n<p>Im Falle eines wirksamen Widerrufs sind die beiderseits empfangenen Leistungen zurückzugewähren und ggf. gezogene Nutzungen (z. B. Zinsen) herauszugeben. Können Sie uns die empfangene Leistung ganz oder teilweise nicht oder nur in verschlechtertem Zustand zurückgewähren, müssen Sie uns insoweit ggf. Wertersatz leisten. Bei der Überlassung von Sachen gilt dies nicht, wenn die Verschlechterung der Sache ausschließlich auf deren Prüfung - wie sie Ihnen etwa im Ladengeschäft möglich gewesen wäre - zurückzuführen ist. Im Übrigen können Sie die Pflicht zum Wertersatz für eine durch die bestimmungsgemäße Ingebrauchnahme der Sache entstandene Verschlechterung vermeiden, indem Sie die Sache nicht wie Ihr Eigentum in Gebrauch nehmen und alles unterlassen, was deren Wert beeinträchtigt.</p>\r\n<p>Paketversandfähige Sachen sind auf unsere Gefahr zurückzusenden. Sie haben die Kosten der Rücksendung zu tragen, wenn die gelieferte Ware der bestellten entspricht und wenn der Preis der zurückzusendenden Sache einen Betrag von 40 Euro nicht übersteigt oder wenn Sie bei einem höheren Preis der Sache zum Zeitpunkt des Widerrufs noch nicht die Gegenleistung oder eine vertraglich vereinbarte Teilzahlung erbracht haben. Anderenfalls ist die Rücksendung für Sie kostenfrei. Nicht paketversandfähige Sachen werden bei Ihnen abgeholt. Verpflichtungen zur Erstattung von Zahlungen müssen innerhalb von 30 Tagen erfüllt werden. Die Frist beginnt für Sie mit der Absendung Ihrer Widerrufserklärung oder der Sache, für uns mit deren Empfang.</p>', '2009-02-23 19:59:38', '2009-02-23 19:59:54', 1, 0, '', '', NULL, NULL),
-(8, 'Datenschutz', 'one_column', '', '', 'datenschutz', '<h2>Datenschutz</h2>\r\n\r\n<p>Die {{block type="symmetrics_impressum/impressum" value="company1"}} nimmt den Schutz personenbezogener Daten sehr ernst. Wir möchten, dass Sie wissen, wann wir welche Daten speichern und wie wir sie verwenden. Als privatrechtliches Unternehmen unterliegen wir den Bestimmungen des Bundesdatenschutzgesetzes (BDSG). Wir haben technische und organisatorische Maßnahmen getroffen, die sicherstellen, dass die Vorschriften über den Datenschutz sowohl von uns als auch von externen Dienstleistern beachtet werden.</p>\r\n\r\n<h3>Datenschutzhinweis</h3>\r\n\r\n<p>Ihre E-Mail-Adresse wird nicht an andere Unternehmen weiter gegeben. Wir verwenden die von Ihnen mitgeteilten Daten zur Erfüllung und Abwicklung Ihrer Bestellung. Bei Anmeldung zum Newsletter wird Ihre E-Mail-Adresse mit Ihrer Einwilligung für eigene Werbezwecke genutzt, bis Sie sich vom Newsletter abmelden.</p>\r\n<p>Der Widerruf ist zu richten an:</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="address"}}</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="communication"}}</p>\r\n\r\n<h3>Einsatz von Cookies</h3>\r\n\r\n<p>Ein "Cookie" ist eine kleine Datendatei, die von uns auf Ihren Computers übertragen wird, wenn Sie auf unserer Site surfen. Ein Cookie kann nur Informationen enthalten, die wir selbst an Ihren Rechner senden – private Daten lassen sich damit nicht auslesen. Wenn Sie die Cookies auf unserer Site akzeptieren, haben wir keinen Zugriff auf Ihre persönlichen Informationen, aber mit Hilfe der Cookies können wir Ihren Computer identifizieren. </p>\r\n<p>Wir verwenden Cookies: Sie verbleiben nicht auf Ihrem Computer. Verlassen Sie unsere Seiten, wird auch der temporäre Cookie nach einer Stunde verworfen. Mit Hilfe der zusammengetragenen Informationen können wir Nutzungsmuster und -strukturen unserer Website analysieren. Auf diese Weise können wir unsere Website immer weiter optimieren, indem wir den Inhalt oder die Personalisierung verbessern und die Nutzung vereinfachen.</p>\r\n<p>Wir verwenden Cookies damit Sie den Warenkorb während Ihrer Sitzung mit Bestellungen auffüllen und verwalten können. Um den Warenkorb nutzen zu können müssen die temporären Cookies zugelassen werden. </p>\r\n\r\n<h3>Kinder</h3>\r\n<p>Personen unter 18 Jahren sollten ohne Zustimmung der Eltern oder Erziehungsberechtigten keine personenbezogenen Daten an uns übermitteln. Wir fordern keine personenbezogenen Daten von Kindern an, sammeln diese nicht und geben sie nicht an Dritte weiter. </p>\r\n\r\n<h3>Fragen und Kommentare</h3>\r\n<p>Nach dem Bundesdatenschutzgesetz haben Sie ein Recht auf unentgeltliche Auskunft über Ihre gespeicherten Daten sowie ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Für Fragen, Anregungen oder Kommentare zum Thema Datenschutz wenden Sie sich bitte per E-Mail an {{block type="symmetrics_impressum/impressum" value="email"}}.</p>', '2009-02-23 20:04:20', '2009-02-23 20:04:46', 1, 0, '', '', NULL, NULL);
+(7, 'Datenschutz', 'one_column', '', '', 'datenschutz', '<h2>Datenschutz</h2>\r\n\r\n<p>Die {{block type="symmetrics_impressum/impressum" value="company1"}} nimmt den Schutz personenbezogener Daten sehr ernst. Wir möchten, dass Sie wissen, wann wir welche Daten speichern und wie wir sie verwenden. Als privatrechtliches Unternehmen unterliegen wir den Bestimmungen des Bundesdatenschutzgesetzes (BDSG). Wir haben technische und organisatorische Maßnahmen getroffen, die sicherstellen, dass die Vorschriften über den Datenschutz sowohl von uns als auch von externen Dienstleistern beachtet werden.</p>\r\n\r\n<h3>Datenschutzhinweis</h3>\r\n\r\n<p>Ihre E-Mail-Adresse wird nicht an andere Unternehmen weiter gegeben. Wir verwenden die von Ihnen mitgeteilten Daten zur Erfüllung und Abwicklung Ihrer Bestellung. Bei Anmeldung zum Newsletter wird Ihre E-Mail-Adresse mit Ihrer Einwilligung für eigene Werbezwecke genutzt, bis Sie sich vom Newsletter abmelden.</p>\r\n<p>Der Widerruf ist zu richten an:</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="address"}}</p>\r\n<p>{{block type="symmetrics_impressum/impressum" value="communication"}}</p>\r\n\r\n<h3>Einsatz von Cookies</h3>\r\n\r\n<p>Ein "Cookie" ist eine kleine Datendatei, die von uns auf Ihren Computers übertragen wird, wenn Sie auf unserer Site surfen. Ein Cookie kann nur Informationen enthalten, die wir selbst an Ihren Rechner senden – private Daten lassen sich damit nicht auslesen. Wenn Sie die Cookies auf unserer Site akzeptieren, haben wir keinen Zugriff auf Ihre persönlichen Informationen, aber mit Hilfe der Cookies können wir Ihren Computer identifizieren. </p>\r\n<p>Wir verwenden Cookies: Sie verbleiben nicht auf Ihrem Computer. Verlassen Sie unsere Seiten, wird auch der temporäre Cookie nach einer Stunde verworfen. Mit Hilfe der zusammengetragenen Informationen können wir Nutzungsmuster und -strukturen unserer Website analysieren. Auf diese Weise können wir unsere Website immer weiter optimieren, indem wir den Inhalt oder die Personalisierung verbessern und die Nutzung vereinfachen.</p>\r\n<p>Wir verwenden Cookies damit Sie den Warenkorb während Ihrer Sitzung mit Bestellungen auffüllen und verwalten können. Um den Warenkorb nutzen zu können müssen die temporären Cookies zugelassen werden. </p>\r\n\r\n<h3>Kinder</h3>\r\n<p>Personen unter 18 Jahren sollten ohne Zustimmung der Eltern oder Erziehungsberechtigten keine personenbezogenen Daten an uns übermitteln. Wir fordern keine personenbezogenen Daten von Kindern an, sammeln diese nicht und geben sie nicht an Dritte weiter. </p>\r\n\r\n<h3>Fragen und Kommentare</h3>\r\n<p>Nach dem Bundesdatenschutzgesetz haben Sie ein Recht auf unentgeltliche Auskunft über Ihre gespeicherten Daten sowie ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Für Fragen, Anregungen oder Kommentare zum Thema Datenschutz wenden Sie sich bitte per E-Mail an {{block type="symmetrics_impressum/impressum" value="email"}}.</p>', '2009-02-23 20:04:20', '2009-02-23 20:04:46', 1, 0, '', '', NULL, NULL);
 EOF;
 $installer->run($query);
 
@@ -272,8 +118,7 @@ INSERT INTO `cms_page_store` (`page_id`, `store_id`) VALUES
 (4, 0),
 (5, 0),
 (6, 0),
-(7, 0),
-(8, 0);
+(7, 0);
 EOF;
 $installer->run($query);
 
@@ -550,7 +395,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'sales_email/creditmemo_comment/copy_to', ''),
 ('default', 0, 'sales_email/creditmemo_comment/copy_method', 'bcc'),
 ('default', 0, 'tax/classes/shipping_tax_class', '3'),
-('default', 0, 'tax/calculation/based_on', 'origin'),
+('default', 0, 'tax/calculation/based_on', 'billing'),
 ('default', 0, 'tax/calculation/price_includes_tax', '1'),
 ('default', 0, 'tax/calculation/shipping_includes_tax', '1'),
 ('default', 0, 'tax/calculation/apply_after_discount', '0'),
@@ -559,11 +404,11 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'tax/defaults/country', 'DE'),
 ('default', 0, 'tax/defaults/region', '0'),
 ('default', 0, 'tax/defaults/postcode', '*'),
-('default', 0, 'tax/display/column_in_summary', '3'),
+('default', 0, 'tax/display/column_in_summary', '2'),
 ('default', 0, 'tax/display/full_summary', '1'),
 ('default', 0, 'tax/display/shipping', '2'),
-('default', 0, 'tax/display/type', '3'),
-('default', 0, 'tax/display/zero_tax', '1'),
+('default', 0, 'tax/display/type', '2'),
+('default', 0, 'tax/display/zero_tax', '0'),
 ('default', 0, 'tax/weee/enable', '0'),
 ('default', 0, 'tax/weee/display_list', '0'),
 ('default', 0, 'tax/weee/display', '0'),
