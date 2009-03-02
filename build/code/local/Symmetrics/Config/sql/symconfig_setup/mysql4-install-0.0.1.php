@@ -64,6 +64,7 @@ INSERT INTO `tax_calculation` VALUES(3, 3, 3, 1);
 INSERT INTO `tax_calculation` VALUES(3, 5, 3, 4);
 INSERT INTO `tax_calculation` VALUES(5, 4, 3, 2);
 EOF;
+$installer->run($query);
 
 # cms pages
 
