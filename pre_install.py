@@ -56,6 +56,7 @@ def main(config_module, info_py):
         'text_impressum': _read_file_contents('impressum'),
         'text_agb': _read_file_contents('agb'),
         'text_bestellvorgang': _read_file_contents('bestellvorgang'),
+        'text_datenschutz': _read_file_contents('datenschutz'),
         'shopname': magento['shop_name'],
         'meta_description': magento['meta_description'],
         'meta_keywords': magento['meta_keywords'],

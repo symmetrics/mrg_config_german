@@ -80,9 +80,9 @@ INSERT INTO `cms_page` (`page_id`, `title`, `root_template`, `meta_keywords`, `m
 (4, 'Impressum', 'one_column', '', '', 'impressum', '${text_impressum}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (5, 'Über uns', 'one_column', '', '', 'about-us', '${text_ueberuns}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
 (6, 'Zahlungsarten', 'one_column', '', '', 'payment', '${text_zahlung}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
-(7, 'Datenschutz', 'one_column', '', '', 'datenschutz', '${text_datenschutz}', '2009-02-23 20:04:20', '2009-02-23 20:04:46', 1, 0, '', '', NULL, NULL);
+(7, 'Datenschutz', 'one_column', '', '', 'datenschutz', '${text_datenschutz}', '2009-02-23 20:04:20', '2009-02-23 20:04:46', 1, 0, '', '', NULL, NULL),
 (8, 'Lieferung', 'one_column', '', '', 'shipping', '${text_versand}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
-(9, 'Bestellvorgang', 'one_column', '', '', 'order', '${text_bestellvorgang}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL),
+(9, 'Bestellvorgang', 'one_column', '', '', 'order', '${text_bestellvorgang}', '${datetime}', '${datetime}', 1, 0, '', '', NULL, NULL);
 EOF;
 $installer->run($query);
 
