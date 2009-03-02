@@ -474,7 +474,8 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'sales_pdf/creditmemo/put_order_id', '1'),
 ('default', 0, 'sales/identity/logo', 'default/logo.jpg'),
 ('default', 0, 'general/impressum/bankaccountowner', '${bank_account_owner}'),
-('default', 0, 'sales_pdf/invoice/customeridprefix', '${invoice_customerprefix}');
+('default', 0, 'sales_pdf/invoice/customeridprefix', '${invoice_customerprefix}'),
+('default', 0, 'tax/display/shippingurl', 'shipping');
 EOF;
 $installer->run($query);
 
