@@ -18,73 +18,52 @@ $installer->run($query);
 # taxes
 
 $query = <<< EOF
-DELETE FROM `tax_calculation_rate`;
+delete from tax_calculation_rule;
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation_rate` (`tax_calculation_rate_id`, `tax_country_id`, `tax_region_id`, `tax_postcode`, `code`, `rate`) VALUES
-(1, 'DE', 0, '*', 'Standard 19%', 19.0000),
-(2, 'DE', 0, '*', 'Ermäßigt 7%', 7.0000),
-(3, 'DE', 0, '*', 'Händler 0%', 0.0000);
+INSERT INTO `tax_calculation_rule` VALUES(3, 'Produkte mit 19% MwSt.', 1, 0);
+INSERT INTO `tax_calculation_rule` VALUES(4, 'Produkte mit 7% MwSt.', 2, 0);
+INSERT INTO `tax_calculation_rule` VALUES(5, 'Versand mit 19% MwSt.', 3, 0);
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-DELETE FROM `tax_calculation_rule`;
+delete from tax_class;
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation_rule` (`tax_calculation_rule_id`, `code`, `priority`, `position`) VALUES
-(1, 'Standard 19%', 0, 1),
-(2, 'Ermäßigt 7%', 0, 2),
-(3, 'Händler Standard 0%', 0, 3);
+INSERT INTO `tax_class` VALUES(1, 'Umsatzsteuerpfichtige Güter 19% ', 'PRODUCT');
+INSERT INTO `tax_class` VALUES(2, 'Umsatzsteuerpfichtige Güter 7%', 'PRODUCT');
+INSERT INTO `tax_class` VALUES(3, 'inkl. Mehrwertsteuer', 'CUSTOMER');
+INSERT INTO `tax_class` VALUES(4, 'Versand', 'PRODUCT');
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-DELETE FROM `tax_class`;
+delete from tax_calculation_rate;
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_class` (`class_id`, `class_name`, `class_type`) VALUES
-(1, 'Ermäßigt 7%', 'PRODUCT'),
-(2, 'Endkunde', 'CUSTOMER'),
-(3, 'Standard 19%', 'PRODUCT'),
-(4, 'Händler 0%', 'PRODUCT'),
-(5, 'Händler', 'CUSTOMER');
+INSERT INTO `tax_calculation_rate` VALUES(3, 'DE', 0, '*', '19% Steuer', 19.0000);
+INSERT INTO `tax_calculation_rate` VALUES(4, 'DE', 0, '*', '0% Steuer', 0.0000);
+INSERT INTO `tax_calculation_rate` VALUES(5, 'DE', 0, '*', '7% Steuer', 7.0000);
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-DELETE FROM `tax_calculation`;
+delete from tax_calculation;
 EOF;
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation` (`tax_calculation_rate_id`, `tax_calculation_rule_id`, `customer_tax_class_id`, `product_tax_class_id`) VALUES
-(1, 1, 2, 3),
-(2, 2, 2, 1),
-(3, 3, 5, 4);
+INSERT INTO `tax_calculation` VALUES(3, 3, 3, 1);
+INSERT INTO `tax_calculation` VALUES(3, 5, 3, 4);
+INSERT INTO `tax_calculation` VALUES(5, 4, 3, 2);
 EOF;
-$installer->run($query);
-
-$query = <<< EOF
-DELETE FROM `customer_group`;
-EOF;
-$installer->run($query);
-
-# customer groups
-
-$query = <<< EOF
-INSERT INTO `customer_group` (`customer_group_id`, `customer_group_code`, `tax_class_id`) VALUES
-(0, 'NOT LOGGED IN', 3),
-(1, 'Endkunde', 3),
-(3, 'Händler', 5);
-EOF;
-$installer->run($query);
 
 # cms pages
 
@@ -397,21 +376,21 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'sales_email/creditmemo_comment/guest_template', '22'),
 ('default', 0, 'sales_email/creditmemo_comment/copy_to', ''),
 ('default', 0, 'sales_email/creditmemo_comment/copy_method', 'bcc'),
-('default', 0, 'tax/classes/shipping_tax_class', '3'),
-('default', 0, 'tax/calculation/based_on', 'billing'),
+('default', 0, 'tax/classes/shipping_tax_class', '4'),
+('default', 0, 'tax/calculation/based_on', 'origin'),
 ('default', 0, 'tax/calculation/price_includes_tax', '1'),
-('default', 0, 'tax/calculation/shipping_includes_tax', '1'),
-('default', 0, 'tax/calculation/apply_after_discount', '0'),
+('default', 0, 'tax/calculation/shipping_includes_tax', '0'),
+('default', 0, 'tax/calculation/apply_after_discount', '1'),
 ('default', 0, 'tax/calculation/discount_tax', '0'),
 ('default', 0, 'tax/calculation/apply_tax_on', '0'),
 ('default', 0, 'tax/defaults/country', 'DE'),
-('default', 0, 'tax/defaults/region', '0'),
-('default', 0, 'tax/defaults/postcode', '*'),
+('default', 0, 'tax/defaults/region', '79'),
+('default', 0, 'tax/defaults/postcode', '${zip}'),
 ('default', 0, 'tax/display/column_in_summary', '2'),
 ('default', 0, 'tax/display/full_summary', '1'),
 ('default', 0, 'tax/display/shipping', '2'),
 ('default', 0, 'tax/display/type', '2'),
-('default', 0, 'tax/display/zero_tax', '0'),
+('default', 0, 'tax/display/zero_tax', '1'),
 ('default', 0, 'tax/weee/enable', '0'),
 ('default', 0, 'tax/weee/display_list', '0'),
 ('default', 0, 'tax/weee/display', '0'),
@@ -436,7 +415,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'checkout/payment_failed/copy_to', ''),
 ('default', 0, 'checkout/payment_failed/copy_method', 'bcc'),
 ('default', 0, 'shipping/origin/country_id', 'DE'),
-('default', 0, 'shipping/origin/region_id', '0'),
+('default', 0, 'shipping/origin/region_id', '79'),
 ('default', 0, 'shipping/origin/postcode', '${zip}'),
 ('default', 0, 'shipping/origin/city', '${city}'),
 ('default', 0, 'shipping/option/checkout_multiple', '1'),
