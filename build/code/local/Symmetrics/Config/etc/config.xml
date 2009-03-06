@@ -33,4 +33,13 @@
 		<extraconfig />
 		<blocks />
 	</global>
+    <frontend>
+		<layout>
+			<updates>
+				<dynamicblockcms>
+					<file>configblocks.xml</file>
+				</dynamicblockcms>
+			</updates>
+		</layout>
+	</frontend>
 </config>
