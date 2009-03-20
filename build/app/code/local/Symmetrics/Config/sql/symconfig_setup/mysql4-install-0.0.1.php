@@ -15,6 +15,17 @@ INSERT INTO `checkout_agreement` (`agreement_id`, `name`, `content`, `content_he
 EOF;
 $installer->run($query);
 
+$query = <<< EOF
+DELETE FROM `checkout_agreement_store`;
+EOF;
+$installer->run($query);
+
+$query = <<< EOF
+INSERT INTO `checkout_agreement_store` (`agreement_id`, `store_id`) VALUES
+(1, 0);
+EOF;
+$installer->run($query);
+
 # taxes
 
 $query = <<< EOF
@@ -101,7 +112,8 @@ INSERT INTO `cms_page_store` (`page_id`, `store_id`) VALUES
 (5, 0),
 (6, 0),
 (7, 0),
-(8, 0);
+(8, 0),
+(9, 0);
 EOF;
 $installer->run($query);
 
