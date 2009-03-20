@@ -25,7 +25,7 @@ maintainer = {
 }
 
 # relative installation path (e.g. app/code/local)
-install_path = 'app'
+install_path = ''
 
 # additional infos
 info = 'symmetrics Basiskonfiguration für deutsche Shops'
