@@ -114,7 +114,7 @@ $installer->run($query);
 
 $query = <<< EOF
 INSERT INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`) VALUES
-(1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}about-us">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB - Rückgaberecht</a></li>\r\n<li><a href="{{store url=""}}widerrufsbelehrung">Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}payment">Zahlung</a></li>\r\n<li><a href="{{store url=""}}shipping">Versand</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
+(1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}about-us">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB / Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}order">Bestellvorgang</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}payment">Zahlung</a></li>\r\n<li><a href="{{store url=""}}shipping">Versand</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
 EOF;
 $installer->run($query);
 
@@ -478,6 +478,7 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES
 ('default', 0, 'general/impressum/swift', '${swift}'),
 ('default', 0, 'general/impressum/iban', '${iban}'),
 ('default', 0, 'general/impressum/shopname', '${shopname}'),
+('default', 0, 'general/impressum/rechtlicheregelungen', '${text_rechlicheregelungen}'),
 ('default', 0, 'sales_pdf/invoice/put_order_id', '1'),
 ('default', 0, 'sales_pdf/invoice/maturity', '${invoice_maturity}'),
 ('default', 0, 'sales_pdf/invoice/note', '${invoice_note}'),
