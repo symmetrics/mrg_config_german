@@ -3,13 +3,11 @@
 	<modules>
 		<Symmetrics_Config>
 			<version>0.0.1</version>
-			<depends>
-				<!-- no dependencies -->
-			</depends>
+			<depends />
 		</Symmetrics_Config>
 	</modules>
 	<global>
-		<models />
+		<blocks />
 		<resources>
 			<symconfig_setup>
 				<setup>
@@ -31,9 +29,9 @@
 			</groupsstores_read>
 		</resources>
 		<extraconfig />
-		<blocks />
+		<models />
 	</global>
-    <frontend>
+	<frontend>
 		<layout>
 			<updates>
 				<dynamicblockcms>
