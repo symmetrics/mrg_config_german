@@ -126,7 +126,7 @@ $installer->run($query);
 
 $query = <<< EOF
 INSERT INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`) VALUES
-(1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}ueber-uns">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB / Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}bestellung">Bestellvorgang</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}zahlung">Zahlung</a></li>\r\n<li><a href="{{store url=""}}lieferung">Versand</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
+(1, 'Footer Links', 'footer_links', '<ul>\r\n<li><a href="{{store url=""}}ueber-uns">Über uns</a></li>\r\n<li><a href="{{store url=""}}agb">AGB / Widerrufsbelehrung</a></li>\r\n<li><a href="{{store url=""}}bestellung">Bestellvorgang</a></li>\r\n<li><a href="{{store url=""}}datenschutz">Datenschutz</a></li>\r\n<li><a href="{{store url=""}}zahlung">Zahlung</a></li>\r\n<li><a href="{{store url=""}}lieferung">Lieferung</a></li>\r\n<li class="last"><a href="{{store url=""}}impressum">Impressum</a></li>\r\n</ul>', '${datetime}', '${datetime}', 1);
 EOF;
 $installer->run($query);
 
@@ -203,6 +203,7 @@ INSERT INTO `core_translate` (`string`, `store_id`, `translate`, `locale`) VALUE
 ('Mage_Newsletter::Sign up for our newsletter:', 0, 'Abonnieren Sie unseren Newsletter (Abmeldung jederzeit möglich):', 'de_DE'),
 ('Mage_Customer::Sign Up for Newsletter', 0, 'In den Newsletter eintragen (Abmeldung jederzeit möglich)', 'de_DE');
 EOF;
+$installer->run($query);
 
 # configuration
 
