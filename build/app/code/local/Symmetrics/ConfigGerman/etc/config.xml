@@ -2,7 +2,7 @@
 <!--
 /**
  * @category Symmetrics
- * @package Symmetrics_Config
+ * @package Symmetrics_ConfigGerman
  * @author symmetrics gmbh <info@symmetrics.de>, Sergej Braznikov <sb@symmetrics.de>
  * @copyright symmetrics gmbh
  * @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -10,17 +10,17 @@
 -->
 <config>
 	<modules>
-		<Symmetrics_Config>
+		<Symmetrics_ConfigGerman>
 			<version>0.1.0</version>
 			<depends />
-		</Symmetrics_Config>
+		</Symmetrics_ConfigGerman>
 	</modules>
 	<global>
 		<blocks />
 		<resources>
 			<symconfig_setup>
 				<setup>
-					<module>Symmetrics_Config</module>
+					<module>Symmetrics_ConfigGerman</module>
 				</setup>
 				<connection>
 					<use>core_setup</use>

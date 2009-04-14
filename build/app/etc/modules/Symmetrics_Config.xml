@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
 	<modules>
-		<Symmetrics_Config>
+		<Symmetrics_ConfigGerman>
 			<active>true</active>
 			<codePool>local</codePool>
-		</Symmetrics_Config>     
+		</Symmetrics_ConfigGerman>     
 	</modules>
 </config>
