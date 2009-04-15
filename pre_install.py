@@ -39,7 +39,7 @@ def main(config_module, info_py):
     config = config_module
     sql_file = os.path.join(package_dir, 'config.sql')
     
-    config_php = os.path.join('build', 'app', 'code', 'local', 'Symmetrics', 'Config',
+    config_php = os.path.join('build', 'app', 'code', 'local', 'Symmetrics', 'ConfigGerman',
                               'sql', 'symconfig_setup', 'mysql4-install-0.0.1')
     content = _read_file_contents(config_php, '.php')
     
