@@ -11,42 +11,37 @@
 <config>
 	<modules>
 		<Symmetrics_ConfigGerman>
-			<version>0.1.0</version>
+			<version>0.1.1</version>
 			<depends />
 		</Symmetrics_ConfigGerman>
 	</modules>
 	<global>
-		<blocks />
 		<resources>
-			<symconfig_setup>
+			<config_german_setup>
 				<setup>
 					<module>Symmetrics_ConfigGerman</module>
 				</setup>
 				<connection>
 					<use>core_setup</use>
 				</connection>
-			</symconfig_setup>
-			<groupsstores_write>
+			</config_german_setup>
+			<config_german_setup>
 				<connection>
 					<use>core_write</use>
 				</connection>
-			</groupsstores_write>
-			<groupsstores_read>
+			</config_german_setup>
+			<config_german_setup>
 				<connection>
 					<use>core_read</use>
 				</connection>
-			</groupsstores_read>
+			</config_german_setup>
 		</resources>
-		<extraconfig />
-		<models />
 	</global>
-	<frontend>
-		<layout>
-			<updates>
-				<dynamicblockcms>
-					<file>configblocks.xml</file>
-				</dynamicblockcms>
-			</updates>
-		</layout>
-	</frontend>
+	<default>
+        <config_german>
+			<field1>test</field1>
+			<field2>test</field2>
+			<field3>test</field3>
+        </config_german>
+    </default>
 </config>
