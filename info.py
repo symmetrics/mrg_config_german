@@ -45,8 +45,6 @@ NOTES = '''
 # =============================================================================
 REQUIRES = {
     'magento': '*',
-    'symmetrics_module_impressum': '*',
-    'symmetrics_module_invoicepdf': '*',
     'mc_module_locale_mage_community_de_de': '*',
 }
 
