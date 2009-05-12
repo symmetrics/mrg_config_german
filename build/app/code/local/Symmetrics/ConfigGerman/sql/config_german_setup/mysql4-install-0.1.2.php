@@ -1,13 +1,10 @@
 <?php
 
 $configData = Mage::getConfig()->getNode('default/config_german')->asArray();
-
 $installer = $this;
 $installer->startSetup();
 
-$query = <<< EOF
-delete from tax_calculation_rule;
-EOF;
+$query = "DELETE FROM `tax_calculation_rule`;";
 $installer->run($query);
 
 $query = <<< EOF
@@ -17,9 +14,7 @@ INSERT INTO `tax_calculation_rule` VALUES(5, 'Versand mit 19% MwSt.', 3, 0);
 EOF;
 $installer->run($query);
 
-$query = <<< EOF
-delete from tax_class;
-EOF;
+$query = "DELETE FROM `tax_class`;";
 $installer->run($query);
 
 $query = <<< EOF
@@ -30,9 +25,7 @@ INSERT INTO `tax_class` VALUES(4, 'Versand', 'PRODUCT');
 EOF;
 $installer->run($query);
 
-$query = <<< EOF
-delete from tax_calculation_rate;
-EOF;
+$query = "DELETE FROM `tax_calculation_rate`;";
 $installer->run($query);
 
 $query = <<< EOF
@@ -42,9 +35,7 @@ INSERT INTO `tax_calculation_rate` VALUES(5, 'DE', 0, '*', '7% Steuer', 7.0000);
 EOF;
 $installer->run($query);
 
-$query = <<< EOF
-delete from tax_calculation;
-EOF;
+$query = "DELETE FROM `tax_calculation`;";
 $installer->run($query);
 
 $query = <<< EOF
@@ -54,12 +45,7 @@ INSERT INTO `tax_calculation` VALUES(5, 4, 3, 2);
 EOF;
 $installer->run($query);
 
-
-# configuration
-
-$query = <<< EOF
-DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';
-EOF;
+$query = "DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';";
 $installer->run($query);
 
 $installer->setConfigData('general/country/allow', 'DE');
@@ -79,17 +65,17 @@ $installer->setConfigData('design/theme/layout', '');
 $installer->setConfigData('design/theme/layout_ua_regexp', 'a:0:{}');
 $installer->setConfigData('design/theme/default', '');
 $installer->setConfigData('design/theme/default_ua_regexp', 'a:0:{}');
-$installer->setConfigData('design/head/default_title', $configData['shop_name']);
+$installer->setConfigData('design/head/default_title', $configData['default']['shop_name']);
 $installer->setConfigData('design/head/title_prefix', '');
 $installer->setConfigData('design/head/title_suffix', '');
-$installer->setConfigData('design/head/default_description', $configData['meta_description']);
-$installer->setConfigData('design/head/default_keywords', $configData['meta_keywords']);
-$installer->setConfigData('design/head/default_robots', $configData['meta_robots']);
+$installer->setConfigData('design/head/default_description', $configData['default']['meta_description']);
+$installer->setConfigData('design/head/default_keywords', $configData['default']['meta_keywords']);
+$installer->setConfigData('design/head/default_robots', $configData['default']['meta_robots']);
 $installer->setConfigData('design/head/includes', '');
 $installer->setConfigData('design/header/logo_src', 'images/logo.gif');
-$installer->setConfigData('design/header/logo_alt', $configData['shop_name']);
-$installer->setConfigData('design/header/welcome', $configData['welcome_msg']);
-$installer->setConfigData('design/footer/copyright', $configData['copyright']);
+$installer->setConfigData('design/header/logo_alt', $configData['default']['shop_name']);
+$installer->setConfigData('design/header/welcome', $configData['default']['welcome_msg']);
+$installer->setConfigData('design/footer/copyright', $configData['default']['copyright']);
 $installer->setConfigData('design/footer/absolute_footer', '');
 $installer->setConfigData('design/watermark/image_size', '');
 $installer->setConfigData('design/watermark/image_position', 'stretch');
@@ -97,18 +83,18 @@ $installer->setConfigData('design/watermark/small_image_size', '');
 $installer->setConfigData('design/watermark/small_image_position', 'stretch');
 $installer->setConfigData('design/watermark/thumbnail_size', '');
 $installer->setConfigData('design/watermark/thumbnail_position', 'stretch');
-$installer->setConfigData('trans_email/ident_general/name', $configData['contact_name']);
-$installer->setConfigData('trans_email/ident_general/email', $configData['contact_email']);
-$installer->setConfigData('trans_email/ident_sales/name', $configData['contact_sales_name']);
-$installer->setConfigData('trans_email/ident_sales/email', $configData['contact_sales_email']);
-$installer->setConfigData('trans_email/ident_support/name', $configData['contact_support_name']);
-$installer->setConfigData('trans_email/ident_support/email', $configData['contact_support_email']);
-$installer->setConfigData('trans_email/ident_custom1/name', $configData['contact_custom1_name']);
-$installer->setConfigData('trans_email/ident_custom1/email', $configData['contact_custom1_email']);
-$installer->setConfigData('trans_email/ident_custom2/name', $configData['contact_custom2_name']);
-$installer->setConfigData('trans_email/ident_custom2/email', $configData['contact_custom2_email']);
+$installer->setConfigData('trans_email/ident_general/name', $configData['default']['contact_name']);
+$installer->setConfigData('trans_email/ident_general/email', $configData['default']['contact_email']);
+$installer->setConfigData('trans_email/ident_sales/name', $configData['default']['contact_sales_name']);
+$installer->setConfigData('trans_email/ident_sales/email', $configData['default']['contact_sales_email']);
+$installer->setConfigData('trans_email/ident_support/name', $configData['default']['contact_support_name']);
+$installer->setConfigData('trans_email/ident_support/email', $configData['default']['contact_support_email']);
+$installer->setConfigData('trans_email/ident_custom1/name', $configData['default']['contact_custom1_name']);
+$installer->setConfigData('trans_email/ident_custom1/email', $configData['default']['contact_custom1_email']);
+$installer->setConfigData('trans_email/ident_custom2/name', $configData['default']['contact_custom2_name']);
+$installer->setConfigData('trans_email/ident_custom2/email', $configData['default']['contact_custom2_email']);
 $installer->setConfigData('contacts/contacts/enabled', '1');
-$installer->setConfigData('contacts/email/recipient_email', $configData['contact_recipient']);
+$installer->setConfigData('contacts/email/recipient_email', $configData['default']['contact_recipient']);
 $installer->setConfigData('contacts/email/sender_email_identity', 'general');
 $installer->setConfigData('catalog/review/allow_guest', '1');
 $installer->setConfigData('catalog/frontend/list_mode', 'grid-list');
@@ -175,13 +161,13 @@ $installer->setConfigData('newsletter/sending/set_return_path', '0');
 $installer->setConfigData('customer/online_customers/online_minutes_interval', '');
 $installer->setConfigData('customer/account_share/scope', '1');
 $installer->setConfigData('customer/create_account/default_group', '1');
-$installer->setConfigData('customer/create_account/email_domain', $configData['email_domain']);
+$installer->setConfigData('customer/create_account/email_domain', $configData['default']['email_domain']);
 $installer->setConfigData('customer/create_account/email_identity', 'general');
 $installer->setConfigData('customer/create_account/confirm', '0');
 $installer->setConfigData('customer/password/forgot_email_identity', 'support');
 $installer->setConfigData('customer/address/street_lines', '2');
 $installer->setConfigData('customer/address/prefix_show', 'req');
-$installer->setConfigData('customer/address/prefix_options', $configData['prefix_options']);
+$installer->setConfigData('customer/address/prefix_options', $configData['default']['prefix_options']);
 $installer->setConfigData('customer/address/middlename_show', '0');
 $installer->setConfigData('customer/address/suffix_show', '');
 $installer->setConfigData('customer/address/suffix_options', '');
@@ -230,7 +216,7 @@ $installer->setConfigData('tax/calculation/discount_tax', '1');
 $installer->setConfigData('tax/calculation/apply_tax_on', '0');
 $installer->setConfigData('tax/defaults/country', 'DE');
 $installer->setConfigData('tax/defaults/region', '79');
-$installer->setConfigData('tax/defaults/postcode', $configData['zip']);
+$installer->setConfigData('tax/defaults/postcode', $configData['default']['zip']);
 $installer->setConfigData('tax/display/column_in_summary', '2');
 $installer->setConfigData('tax/display/full_summary', '1');
 $installer->setConfigData('tax/display/shipping', '2');
@@ -260,8 +246,8 @@ $installer->setConfigData('checkout/payment_failed/copy_to', '');
 $installer->setConfigData('checkout/payment_failed/copy_method', 'bcc');
 $installer->setConfigData('shipping/origin/country_id', 'DE');
 $installer->setConfigData('shipping/origin/region_id', '79');
-$installer->setConfigData('shipping/origin/postcode', $configData['zip']);
-$installer->setConfigData('shipping/origin/city', $configData['city']);
+$installer->setConfigData('shipping/origin/postcode', $configData['default']['zip']);
+$installer->setConfigData('shipping/origin/city', $configData['default']['city']);
 $installer->setConfigData('shipping/option/checkout_multiple', '1');
 $installer->setConfigData('shipping/option/checkout_multiple_maximum_qty', '100');
 $installer->setConfigData('dev/restrict/allow_ips', '');
@@ -279,7 +265,7 @@ $installer->setConfigData('sales/totals_sort/weee', '50');
 $installer->setConfigData('sales/totals_sort/tax', '40');
 $installer->setConfigData('sales/totals_sort/grand_total', '100');
 $installer->setConfigData('sales/reorder/allow', '1');
-$installer->setConfigData('sales/identity/address', $configData['invoice_address']);
+$installer->setConfigData('sales/identity/address', $configData['default']['invoice_address']);
 $installer->setConfigData('sales/minimum_order/active', '0');
 $installer->setConfigData('sales/minimum_order/amount', '');
 $installer->setConfigData('sales/minimum_order/description', '');
