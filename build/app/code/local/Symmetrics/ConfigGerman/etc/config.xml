@@ -64,33 +64,8 @@ Max Mustermann
 Musterstrasse 1a
 12345 Musterstadt
 Deutschland]]></invoice_address>
-	            <company_name><![CDATA[Musterfirma GmbH]]></company_name>
-	            <street><![CDATA[Musterstrasse 1a]]></street>
 	            <zip><![CDATA[12345]]></zip>
 	            <city><![CDATA[Musterstadt]]></city>
-	            <phone><![CDATA[+49 (0) 123 987 654 321]]></phone>
-	            <fax><![CDATA[+49 (0) 123 321 654 897]]></fax>
-	            <email><![CDATA[info@musterdomain.de]]></email>
-	            <homepage><![CDATA[www.musterdomain.de]]></homepage>
-	            <tax_number><![CDATA[12/123/123456]]></tax_number>
-	            <sales_tax_id_number><![CDATA[DE123456789]]></sales_tax_id_number>
-	            <commercial_register><![CDATA[Gericht Musterstadt]]></commercial_register>
-	            <tax_office><![CDATA[Finanzamt Musterstadt]]></tax_office>
-	            <holder_names><![CDATA[Max Mustermann, Petra Muster]]></holder_names>
-	            <hrb><![CDATA[123456789]]></hrb>
-	            <bank_account><![CDATA[123 456 789]]></bank_account>
-	            <bank_id_code><![CDATA[100 200 30]]></bank_id_code>
-	            <bank_name><![CDATA[Musterbank]]></bank_name>
-	            <bank_swift><![CDATA[12345]]></bank_swift>
-	            <bank_iban><![CDATA[12345]]></bank_iban>
-	            <bank_account_owner><![CDATA[Musterfirma GmbH]]></bank_account_owner>
-	            <legal_info><![CDATA[<p><strong>Max Muster, Apotheker</strong></p>
-<p>Die Berufsbezeichnung "Apotheker" wurde in der Bundesrepublik Deutschland verliehen.</p>
-<p>Zuständige Aufsichtsbehörde: Gesundheitsamt Musterstadt</p>
-<p>Mitglied der Apothekenkammer Musterstadt</p>]]></legal_info>
-	            <invoice_maturity><![CDATA[14]]></invoice_maturity>
-	            <invoice_note><![CDATA[Vielen Dank für Ihren Auftrag!]]></invoice_note>
-	            <invoice_customer_prefix><![CDATA[K]]></invoice_customer_prefix>
             </default>
         </config_german>
     </default>
