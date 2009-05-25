@@ -11,7 +11,10 @@ und die Mehrwersteuerkonfiguration gelöscht!
 befindet, nach app/code/local oder app/code/community 
 kopieren.
 
-2. ConfigGerman/etc/config.xml öffnen und Beispieltexte
+2. Datei app/etc/modules/Symmetrics_Config.xml nach
+app/etc/modules kopieren um das Modul zu aktivieren.
+
+3. ConfigGerman/etc/config.xml öffnen und Beispieltexte
 mit eigenen Daten ersetzen. Diese Daten können später 
 über die Admin-Oberfläche im Bereich "Konfiguration" 
 geändert werden.
@@ -21,11 +24,14 @@ z.B.:
 ändern in
 <shop_name><![CDATA[Mein Shop]]></shop_name>
 
-3. Cache löschen
+Bitte beachten Sie, dass die XML-Datei in UTF-8
+(Ohne BOM) gespeichert werden muss.
 
-4. Frontend aufrufen
+4. Cache löschen
 
-5. Fertig!
+5. Frontend aufrufen
+
+6. Fertig!
 
 ACHTUNG!!! Das Modul überschreibt unwiderruflich 
 die bereits vorhandene Konfiguration inkl. 
@@ -86,3 +92,19 @@ Die Konfigurationstabelle wird mithilfe der Magento
 eigenen Funktion setConfigData verändert. Die 
 Einstellungen werden für den Scope = Default (Alle
 Stores, Alle Views) vorgenommen.
+
+Sie können auch andere Einstellungen in der 
+Migrationsdatei mysql4-install-x.x.x.php vornehmen.
+Beachten Sie bitte, dass diese Änderungen nur
+von jemanden vorgenommen werden können der sich
+gut mit der Magento-Struktur und PHP auskennt.
+
+Symmetrics_ConfigGerman ist ein Konfigurationsmodul.
+Das heisst, dass die Updates dieses Moduls nur dann
+möglich sind, wenn die Konfiguration nach der
+Installation unverändert bleibt. Im Rahmen der 
+Wartung wird Symmetrics GmbH aber immer eine DIFF-
+zwischen den einzelnen Update zur Verfügung stellen.
+So können Sie manuell die benötigten neuen Funktionen
+und veränderte Einstellungen aktivieren oder deaktivieren
+indem Sie den Anweisungen in den Update-READMEs folgen.
