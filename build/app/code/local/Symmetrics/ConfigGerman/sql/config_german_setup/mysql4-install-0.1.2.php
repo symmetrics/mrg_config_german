@@ -49,22 +49,13 @@ $query = "DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=
 $installer->run($query);
 
 $installer->setConfigData('general/country/allow', 'DE');
-$installer->setConfigData('catalog/category/root_id', '2');
+$installer->setConfigData('catalog/category/root_id', '0');
 $installer->setConfigData('general/country/default', 'DE');
 $installer->setConfigData('general/country/allow', 'DE');
 $installer->setConfigData('general/locale/firstday', '1');
 $installer->setConfigData('general/locale/weekend', '0,6');
 $installer->setConfigData('design/package/name', 'default');
 $installer->setConfigData('design/package/ua_regexp', 'a:0:{}');
-$installer->setConfigData('design/theme/locale', '');
-$installer->setConfigData('design/theme/template', '');
-$installer->setConfigData('design/theme/template_ua_regexp', 'a:0:{}');
-$installer->setConfigData('design/theme/skin', '');
-$installer->setConfigData('design/theme/skin_ua_regexp', 'a:0:{}');
-$installer->setConfigData('design/theme/layout', '');
-$installer->setConfigData('design/theme/layout_ua_regexp', 'a:0:{}');
-$installer->setConfigData('design/theme/default', '');
-$installer->setConfigData('design/theme/default_ua_regexp', 'a:0:{}');
 $installer->setConfigData('design/head/default_title', $configData['default']['shop_name']);
 $installer->setConfigData('design/head/title_prefix', '');
 $installer->setConfigData('design/head/title_suffix', '');
