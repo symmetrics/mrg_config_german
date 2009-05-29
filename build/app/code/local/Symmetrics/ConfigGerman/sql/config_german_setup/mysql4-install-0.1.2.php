@@ -267,4 +267,18 @@ $installer->setConfigData('sales/minimum_order/multi_address_error_message', '')
 $installer->setConfigData('sales/gift_messages/allow_order', '0');
 $installer->setConfigData('sales/gift_messages/allow_items', '0');
 
+$installer->addAttribute('catalog_product', 'weight', array(
+    'label' => 'Gewicht',
+    'input' => 'text',
+    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'visible' => true,
+    'required' => true,
+    'user_defined' => true,
+    'searchable' => true,
+    'comparable' => true,
+    'visible_on_front' => true,
+    'visible_in_advanced_search' => true,
+    'default' => '1'
+));
+
 $installer->endSetup();

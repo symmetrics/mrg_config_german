@@ -20,6 +20,7 @@
 			<config_german_setup>
 				<setup>
 					<module>Symmetrics_ConfigGerman</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
 				</setup>
 				<connection>
 					<use>core_setup</use>
