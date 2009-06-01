@@ -253,7 +253,7 @@ $installer->setConfigData('sales/totals_sort/subtotal', '10');
 $installer->setConfigData('sales/totals_sort/discount', '20');
 $installer->setConfigData('sales/totals_sort/shipping', '30');
 $installer->setConfigData('sales/totals_sort/weee', '50');
-$installer->setConfigData('sales/totals_sort/tax', '40');
+$installer->setConfigData('sales/totals_sort/tax', '90');
 $installer->setConfigData('sales/totals_sort/grand_total', '100');
 $installer->setConfigData('sales/reorder/allow', '1');
 $installer->setConfigData('sales/identity/address', $configData['default']['invoice_address']);

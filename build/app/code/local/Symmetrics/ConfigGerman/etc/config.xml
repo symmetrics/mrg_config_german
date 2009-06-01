@@ -37,6 +37,13 @@
 				</connection>
 			</config_german_setup>
 		</resources>
+		<pdf>
+            <totals>
+                <tax translate="title">
+                    <sort_order>550</sort_order>
+                </tax>
+            </totals>
+		</pdf>
 	</global>
 	<default>
         <config_german>
@@ -50,7 +57,7 @@
 				<contact_name><![CDATA[Musterfirma GmbH]]></contact_name>
 				<contact_email><![CDATA[mustermail@musterdomain.de]]></contact_email>
 				<contact_sales_name><![CDATA[Verkaufsabteilung]]></contact_sales_name>
-				<contact_sales_email><![CDATA[sales@musterdomain.de]]]></contact_sales_email>
+				<contact_sales_email><![CDATA[sales@musterdomain.de]]></contact_sales_email>
 	            <contact_support_name><![CDATA[Kundenbetreuung]]></contact_support_name>
 	            <contact_support_email><![CDATA[support@musterdomain.de]]></contact_support_email>
 	            <contact_custom1_name><![CDATA[Zusätzliche E-Mail 1]]></contact_custom1_name>
