@@ -48,6 +48,11 @@ $installer->run($query);
 $query = "DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';";
 $installer->run($query);
 
+$installer->setConfigData('general/locale/code', 'de_DE');
+$installer->setConfigData('general/locale/timezone', 'Europe/Berlin');
+$installer->setConfigData('currency/options/base', 'EUR');
+$installer->setConfigData('currency/options/default', 'EUR');
+$installer->setConfigData('currency/options/allow', 'EUR');
 $installer->setConfigData('general/country/allow', 'DE');
 $installer->setConfigData('catalog/category/root_id', '0');
 $installer->setConfigData('general/country/default', 'DE');
