@@ -37,13 +37,6 @@
 				</connection>
 			</config_german_setup>
 		</resources>
-		<pdf>
-            <totals>
-                <tax translate="title">
-                    <sort_order>550</sort_order>
-                </tax>
-            </totals>
-		</pdf>
 	</global>
 	<default>
         <config_german>
