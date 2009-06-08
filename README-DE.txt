@@ -7,14 +7,9 @@ komplett leeren  und neuen Shop zu installieren. Durch die
 Installation wird die vorhandene Konfiguration ueberschrieben
 und die Mehrwersteuerkonfiguration geloescht.
 
-1. Ordner Symmetrics/ConfigGerman, wo sich das Modul 
-befindet, nach app/code/local oder app/code/community 
-kopieren.
+1. Ordner app/ in den Projekt-Root kopieren.
 
-2. Datei app/etc/modules/Symmetrics_Config.xml nach
-app/etc/modules kopieren um das Modul zu aktivieren.
-
-3. ConfigGerman/etc/config.xml oeffnen und Beispieltexte
+2. ConfigGerman/etc/config.xml oeffnen und Beispieltexte
 mit eigenen Daten ersetzen. Diese Daten koennen spaeter 
 ueber die Admin-Oberflaeche im Bereich "Konfiguration" 
 geaendert werden.
