@@ -2,11 +2,11 @@
 Description
 ----------------------------------------------------
 
-This module configures an empty shop for the German
+This module configures an empty, new shop for the German
 market. It is strongly recommendet NOT to install
 this module on the existing shop because it will 
 almost completely rewrite the configuration and 
-taxes.
+taxes settings.
 
 Symmetrics_ConfigGerman makes the first configuration
 of an fresh installed shop more comfortable. It 
@@ -37,3 +37,5 @@ Features:
 - Tax configuration (7%, 19%, 0%)
 - Country, Language, Currency, Time Zone
 - Some Texts and Attributes
+- Custoerm groups settings
+- many other small basic configurations
