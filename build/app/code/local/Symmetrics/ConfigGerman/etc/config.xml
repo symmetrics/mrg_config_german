@@ -11,7 +11,7 @@
 <config>
 	<modules>
 		<Symmetrics_ConfigGerman>
-			<version>0.1.5</version>
+			<version>0.1.6</version>
 			<depends />
 		</Symmetrics_ConfigGerman>
 	</modules>
