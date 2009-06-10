@@ -59,7 +59,6 @@ $installer->setConfigData('general/country/default', 'DE');
 $installer->setConfigData('general/country/allow', 'DE');
 $installer->setConfigData('general/locale/firstday', '1');
 $installer->setConfigData('general/locale/weekend', '0,6');
-$installer->setConfigData('design/package/name', 'default');
 $installer->setConfigData('design/package/ua_regexp', 'a:0:{}');
 $installer->setConfigData('design/head/default_title', $configData['default']['shop_name']);
 $installer->setConfigData('design/head/title_prefix', '');
