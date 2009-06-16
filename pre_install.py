@@ -56,8 +56,10 @@ def main(config_module, info_py):
     )
     
     for key, val in data.iteritems():
-        if type(val) is not basestring:
+        if not isinstance(val, basestring):
             data[key] = str(val)
+        else:
+            data[key] = unicode(val, 'utf-8')
     
     filename = os.path.join(package_dir, 'build', 'app', 'code', 'local',
                             'Symmetrics', 'ConfigGerman', 'etc', 'config.xml')
