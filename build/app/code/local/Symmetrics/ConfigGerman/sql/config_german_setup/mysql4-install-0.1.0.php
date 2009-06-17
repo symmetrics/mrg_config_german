@@ -270,6 +270,11 @@ $installer->setConfigData('sales/minimum_order/multi_address_description', '');
 $installer->setConfigData('sales/minimum_order/multi_address_error_message', '');
 $installer->setConfigData('sales/gift_messages/allow_order', '0');
 $installer->setConfigData('sales/gift_messages/allow_items', '0');
+$installer->setConfigData('catalog/custom_options/date_fields_order', 'd,m,y');
+$installer->setConfigData('catalog/custom_options/time_format', '24h');
+$installer->setConfigData('google/googlebase/target_country', 'DE');
+$installer->setConfigData('payment/free/title', 'Keine Zahlungsinformationen benötigt');
+$installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung');
 
 $installer->addAttribute('catalog_product', 'weight', array(
     'label' => 'Gewicht',
