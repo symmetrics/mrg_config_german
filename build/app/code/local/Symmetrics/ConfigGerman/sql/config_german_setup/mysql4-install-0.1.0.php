@@ -276,6 +276,16 @@ $installer->setConfigData('google/googlebase/target_country', 'DE');
 $installer->setConfigData('payment/free/title', 'Keine Zahlungsinformationen benötigt');
 $installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung');
 
+$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
+
+$installer->setConfigData('carriers/dhl/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/ups/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/usps/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/fedex/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/flatrate/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/tablerate/specificerrmsg', $errorMsg);
+$installer->setConfigData('carriers/freeshipping/specificerrmsg', $errorMsg);
+
 $installer->addAttribute('catalog_product', 'weight', array(
     'label' => 'Gewicht',
     'input' => 'text',
