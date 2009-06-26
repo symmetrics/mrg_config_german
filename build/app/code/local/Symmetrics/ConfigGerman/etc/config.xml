@@ -26,16 +26,16 @@
 					<use>core_setup</use>
 				</connection>
 			</config_german_setup>
-			<config_german_setup>
+			<config_german_write>
 				<connection>
 					<use>core_write</use>
 				</connection>
-			</config_german_setup>
-			<config_german_setup>
+			</config_german_write>
+			<config_german_read>
 				<connection>
 					<use>core_read</use>
 				</connection>
-			</config_german_setup>
+			</config_german_read>
 		</resources>
 	</global>
 	<default>
