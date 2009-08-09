@@ -1,51 +1,51 @@
 <?php
-
 $configData = Mage::getConfig()->getNode('default/config_german')->asArray();
+
 $installer = $this;
 $installer->startSetup();
 
-$query = "DELETE FROM `tax_calculation_rule`;";
+$query = "DELETE FROM {$this->getTable('tax_calculation_rule')};";
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation_rule` VALUES(3, 'Produkte mit 19% MwSt.', 1, 0);
-INSERT INTO `tax_calculation_rule` VALUES(4, 'Produkte mit 7% MwSt.', 2, 0);
-INSERT INTO `tax_calculation_rule` VALUES(5, 'Versand mit 19% MwSt.', 3, 0);
+INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(3, 'Produkte mit 19% MwSt.', 1, 0);
+INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(4, 'Produkte mit 7% MwSt.', 2, 0);
+INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(5, 'Versand mit 19% MwSt.', 3, 0);
 EOF;
 $installer->run($query);
 
-$query = "DELETE FROM `tax_class`;";
+$query = "DELETE FROM {$this->getTable('tax_class')};";
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_class` VALUES(1, 'Umsatzsteuerpfichtige Güter 19% ', 'PRODUCT');
-INSERT INTO `tax_class` VALUES(2, 'Umsatzsteuerpfichtige Güter 7%', 'PRODUCT');
-INSERT INTO `tax_class` VALUES(3, 'inkl. Mehrwertsteuer', 'CUSTOMER');
-INSERT INTO `tax_class` VALUES(4, 'Versand', 'PRODUCT');
+INSERT INTO {$this->getTable('tax_class')} VALUES(1, 'Umsatzsteuerpfichtige Güter 19% ', 'PRODUCT');
+INSERT INTO {$this->getTable('tax_class')} VALUES(2, 'Umsatzsteuerpfichtige Güter 7%', 'PRODUCT');
+INSERT INTO {$this->getTable('tax_class')} VALUES(3, 'inkl. Mehrwertsteuer', 'CUSTOMER');
+INSERT INTO {$this->getTable('tax_class')} VALUES(4, 'Versand', 'PRODUCT');
 EOF;
 $installer->run($query);
 
-$query = "DELETE FROM `tax_calculation_rate`;";
+$query = "DELETE FROM {$this->getTable('tax_calculation_rate')};";
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation_rate` VALUES(3, 'DE', 0, '*', '19% Steuer', 19.0000);
-INSERT INTO `tax_calculation_rate` VALUES(4, 'DE', 0, '*', '0% Steuer', 0.0000);
-INSERT INTO `tax_calculation_rate` VALUES(5, 'DE', 0, '*', '7% Steuer', 7.0000);
+INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(3, 'DE', 0, '*', '19% Steuer', 19.0000);
+INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(4, 'DE', 0, '*', '0% Steuer', 0.0000);
+INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(5, 'DE', 0, '*', '7% Steuer', 7.0000);
 EOF;
 $installer->run($query);
 
-$query = "DELETE FROM `tax_calculation`;";
+$query = "DELETE FROM {$this->getTable('tax_calculation')};";
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO `tax_calculation` VALUES(3, 3, 3, 1);
-INSERT INTO `tax_calculation` VALUES(3, 5, 3, 4);
-INSERT INTO `tax_calculation` VALUES(5, 4, 3, 2);
+INSERT INTO {$this->getTable('tax_calculation')} VALUES(3, 3, 3, 1);
+INSERT INTO {$this->getTable('tax_calculation')} VALUES(3, 5, 3, 4);
+INSERT INTO {$this->getTable('tax_calculation')} VALUES(5, 4, 3, 2);
 EOF;
 $installer->run($query);
 
-$query = "DELETE FROM `core_config_data` WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';";
+$query = "DELETE FROM {$this->getTable('core_config_data')} WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';";
 $installer->run($query);
 
 $installer->setConfigData('general/locale/code', 'de_DE');
