@@ -18,7 +18,7 @@ $query = "DELETE FROM {$this->getTable('tax_class')};";
 $installer->run($query);
 
 $query = <<< EOF
-INSERT INTO {$this->getTable('tax_class')} VALUES(1, 'Umsatzsteuerpfichtige Güter 19% ', 'PRODUCT');
+INSERT INTO {$this->getTable('tax_class')} VALUES(1, 'Umsatzsteuerpfichtige Güter 19%', 'PRODUCT');
 INSERT INTO {$this->getTable('tax_class')} VALUES(2, 'Umsatzsteuerpfichtige Güter 7%', 'PRODUCT');
 INSERT INTO {$this->getTable('tax_class')} VALUES(3, 'inkl. Mehrwertsteuer', 'CUSTOMER');
 INSERT INTO {$this->getTable('tax_class')} VALUES(4, 'Versand', 'PRODUCT');
