@@ -57,5 +57,5 @@ DEPENDS_ON_FILES = (
 PEAR_KEY = ''
 
 COMPATIBLE_WITH = {
-    'magento': ['1.3.2.1', '1.3.2.3'],
+    'magento': ['1.3.2.1', '1.3.2.3', '1.3.2.4'],
 }
