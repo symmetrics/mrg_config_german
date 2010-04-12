@@ -35,10 +35,11 @@ $taxTables = array(
 );
 
 foreach ($taxTables as $table) {
-    /* truncate table, not delete */
+    /* truncate table (not delete) */
     $this->_conn->delete($table);
     $data = $this->getInsertData($table);
 
+    /* insert new tax settings */
     foreach ($data as $insert) {
         $this->_conn->insert($table, $insert);
     }
@@ -47,7 +48,7 @@ foreach ($taxTables as $table) {
 $condition = 'scope = \'default\' AND scope_id = 0 AND path = \'catalog/category/root_id\'';
 $this->_conn->delete($this->getTable('core_config_data'), $condition);
 
-/* set config data */
+/* set different config data */
 $installer->setConfigData('general/locale/code', 'de_DE');
 $installer->setConfigData('general/locale/timezone', 'Europe/Berlin');
 $installer->setConfigData('currency/options/base', 'EUR');
@@ -285,8 +286,7 @@ $installer->setConfigData('google/googlebase/target_country', 'DE');
 $installer->setConfigData('payment/free/title', 'Keine Zahlungsinformationen benötigt');
 $installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung');
 
-$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
-
+/* shipping method codes */
 $shippingMethods = array(
     'dhl',
     'ups',
@@ -297,11 +297,14 @@ $shippingMethods = array(
     'freeshipping'
 );
 
-/* set default error messages for shipping methods */
+$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
+
+/* set default error message for shipping methods */
 foreach ($shippingMethods as $method) {
     $installer->setConfigData('carriers/' . $method . '/specificerrmsg', $errorMsg);
 }
 
+/* add weight attribute */
 $installer->addAttribute(
     'catalog_product', 
     'weight', 

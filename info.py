@@ -26,7 +26,7 @@ MAINTAINER = {
 
 AUTHORS = {
     'Eugen Gitin': 'eg@symmetrics.de',
-    'Siegfried Schmitz', 'ss@symmetrics.de'
+    'Siegfried Schmitz' : 'ss@symmetrics.de'
 }
 
 # =============================================================================

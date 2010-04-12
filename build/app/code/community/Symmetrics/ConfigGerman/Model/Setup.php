@@ -23,7 +23,7 @@
  */
 
  /**
-  * collect data for tax tables
+  * collection of insert data for tax tables
   *
   * @category  Symmetrics
   * @package   Symmetrics_LoremIpsum
@@ -181,7 +181,7 @@ class Symmetrics_ConfigGerman_Model_Setup extends Mage_Eav_Model_Entity_Setup
      *
      * @param string $tableName table name
      *
-     * @return this
+     * @return array
      */
     public function getInsertData($tableName)     
     {
