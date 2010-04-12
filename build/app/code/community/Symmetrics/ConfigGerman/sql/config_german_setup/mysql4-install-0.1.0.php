@@ -1,53 +1,53 @@
 <?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Symmetrics
+ * @package   Symmetrics_ConfigGerman
+ * @author    symmetrics gmbh <info@symmetrics.de>
+ * @author    Eugen Gitin <eg@symmetrics.de>
+ * @author    Siegfried Schmitz <ss@symmetrics.de>
+ * @copyright 2010 symmetrics gmbh
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.symmetrics.de/
+ */
+ 
 $configData = Mage::getConfig()->getNode('default/config_german')->asArray();
 
 $installer = $this;
 $installer->startSetup();
 
-$query = "DELETE FROM {$this->getTable('tax_calculation_rule')};";
-$installer->run($query);
+$taxTables = array(
+    'tax_calculation_rule',
+    'tax_class',
+    'tax_calculation_rate',
+    'tax_calculation'
+);
 
-$query = <<< EOF
-INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(3, 'Produkte mit 19% MwSt.', 1, 0);
-INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(4, 'Produkte mit 7% MwSt.', 2, 0);
-INSERT INTO {$this->getTable('tax_calculation_rule')} VALUES(5, 'Versand mit 19% MwSt.', 3, 0);
-EOF;
-$installer->run($query);
+foreach ($taxTables as $table) {
+    /* truncate table, not delete */
+    $this->_conn->delete($table);
+    $data = $this->getInsertData($table);
 
-$query = "DELETE FROM {$this->getTable('tax_class')};";
-$installer->run($query);
+    foreach ($data as $insert) {
+        $this->_conn->insert($table, $insert);
+    }
+}
 
-$query = <<< EOF
-INSERT INTO {$this->getTable('tax_class')} VALUES(1, 'Umsatzsteuerpflichtige Güter 19%', 'PRODUCT');
-INSERT INTO {$this->getTable('tax_class')} VALUES(2, 'Umsatzsteuerpflichtige Güter 7%', 'PRODUCT');
-INSERT INTO {$this->getTable('tax_class')} VALUES(3, 'inkl. Mehrwertsteuer', 'CUSTOMER');
-INSERT INTO {$this->getTable('tax_class')} VALUES(4, 'Versand', 'PRODUCT');
-EOF;
-$installer->run($query);
+$condition = 'scope = \'default\' AND scope_id = 0 AND path = \'catalog/category/root_id\'';
+$this->_conn->delete($this->getTable('core_config_data'), $condition);
 
-$query = "DELETE FROM {$this->getTable('tax_calculation_rate')};";
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(3, 'DE', 0, '*', '19% Steuer', 19.0000, NULL, NULL, NULL);
-INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(4, 'DE', 0, '*', '0% Steuer', 0.0000, NULL, NULL, NULL);
-INSERT INTO {$this->getTable('tax_calculation_rate')} VALUES(5, 'DE', 0, '*', '7% Steuer', 7.0000, NULL, NULL, NULL);
-EOF;
-$installer->run($query);
-
-$query = "DELETE FROM {$this->getTable('tax_calculation')};";
-$installer->run($query);
-
-$query = <<< EOF
-INSERT INTO {$this->getTable('tax_calculation')} VALUES(3, 3, 3, 1);
-INSERT INTO {$this->getTable('tax_calculation')} VALUES(3, 5, 3, 4);
-INSERT INTO {$this->getTable('tax_calculation')} VALUES(5, 4, 3, 2);
-EOF;
-$installer->run($query);
-
-$query = "DELETE FROM {$this->getTable('core_config_data')} WHERE `scope`='default' AND `scope_id`=0 AND `path`='catalog/category/root_id';";
-$installer->run($query);
-
+/* set config data */
 $installer->setConfigData('general/locale/code', 'de_DE');
 $installer->setConfigData('general/locale/timezone', 'Europe/Berlin');
 $installer->setConfigData('currency/options/base', 'EUR');
@@ -287,26 +287,37 @@ $installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung')
 
 $errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
 
-$installer->setConfigData('carriers/dhl/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/ups/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/usps/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/fedex/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/flatrate/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/tablerate/specificerrmsg', $errorMsg);
-$installer->setConfigData('carriers/freeshipping/specificerrmsg', $errorMsg);
+$shippingMethods = array(
+    'dhl',
+    'ups',
+    'usps',
+    'fedex',
+    'flatrate',
+    'tablerate',
+    'freeshipping'
+);
 
-$installer->addAttribute('catalog_product', 'weight', array(
-    'label' => 'Gewicht',
-    'input' => 'text',
-    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
-    'visible' => true,
-    'required' => true,
-    'user_defined' => true,
-    'searchable' => true,
-    'comparable' => true,
-    'visible_on_front' => true,
-    'visible_in_advanced_search' => true,
-    'default' => '1'
-));
+/* set default error messages for shipping methods */
+foreach ($shippingMethods as $method) {
+    $installer->setConfigData('carriers/' . $method . '/specificerrmsg', $errorMsg);
+}
+
+$installer->addAttribute(
+    'catalog_product', 
+    'weight', 
+    array(
+        'label' => 'Gewicht',
+        'input' => 'text',
+        'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+        'visible' => true,
+        'required' => true,
+        'user_defined' => true,
+        'searchable' => true,
+        'comparable' => true,
+        'visible_on_front' => true,
+        'visible_in_advanced_search' => true,
+        'default' => '1'
+    )
+);
 
 $installer->endSetup();
