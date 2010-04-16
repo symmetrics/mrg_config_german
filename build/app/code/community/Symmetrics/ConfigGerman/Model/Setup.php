@@ -187,16 +187,16 @@ class Symmetrics_ConfigGerman_Model_Setup extends Mage_Eav_Model_Entity_Setup
     {
         switch ($tableName) {
             case 'tax_calculation_rule':
-                return $this->_getTaxCalcRuleData()
+                return $this->_getTaxCalcRuleData();
                 break;
             case 'tax_class':
-                return $this->_getTaxClassData()
+                return $this->_getTaxClassData();
                 break;
             case 'tax_calculation_rate':
-                return $this->_getTaxCalcRateData()
+                return $this->_getTaxCalcRateData();
                 break;
             case 'tax_calculation':
-                return $this->_getTaxCalcData()
+                return $this->_getTaxCalcData();
                 break;
             default:
                 break;
