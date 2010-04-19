@@ -26,7 +26,7 @@
   * collection of insert data for tax tables
   *
   * @category  Symmetrics
-  * @package   Symmetrics_LoremIpsum
+  * @package   Symmetrics_ConfigGerman
   * @author    symmetrics gmbh <info@symmetrics.de>
   * @author    Siegfried Schmitz <ss@symmetrics.de>
   * @copyright 2010 symmetrics gmbh
