@@ -66,10 +66,14 @@ $installer->setConfigData('general/country/allow', 'DE');
 $installer->setConfigData('general/locale/firstday', '1');
 $installer->setConfigData('general/locale/weekend', '0,6');
 $installer->setConfigData('web/secure/use_in_frontend', '1');
-$installer->setConfigData('web/session/use_remote_addr', '1');
-$installer->setConfigData('web/session/use_http_via', '1');
-$installer->setConfigData('web/session/use_http_x_forwarded_for', '1');
-$installer->setConfigData('web/session/use_http_user_agent', '1');
+// NOTE: The following session configuration highly depends on hosting and
+//       productive environment. Please, use them with care and uncomment
+//       only if you know what you are doing. They are still recommended for
+//       security reasons, but beware that this must be tested individually.
+//$installer->setConfigData('web/session/use_remote_addr', '1');
+//$installer->setConfigData('web/session/use_http_via', '1');
+//$installer->setConfigData('web/session/use_http_x_forwarded_for', '1');
+//$installer->setConfigData('web/session/use_http_user_agent', '1');
 $installer->setConfigData('web/cookie/cookie_lifetime', '0');
 $installer->setConfigData('design/head/default_title', $configData['default']['shop_name']);
 $installer->setConfigData('design/head/default_description', $configData['default']['meta_description']);
