@@ -21,7 +21,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.symmetrics.de/
  */
- 
+
 $configData = Mage::getConfig()->getNode('default/config_german')->asArray();
 
 $installer = $this;
@@ -146,7 +146,8 @@ $shippingMethods = array(
     'freeshipping'
 );
 
-$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
+$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. ';
+$errorMsg .= 'Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
 
 /* set default error message for shipping methods */
 foreach ($shippingMethods as $method) {
@@ -154,22 +155,19 @@ foreach ($shippingMethods as $method) {
 }
 
 /* add weight attribute */
-$installer->addAttribute(
-    'catalog_product', 
-    'weight', 
-    array(
-        'label' => 'Gewicht',
-        'input' => 'text',
-        'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
-        'is_visible' => true,
-        'is_required' => true,
-        'is_user_defined' => true,
-        'is_searchable' => true,
-        'is_comparable' => true,
-        'is_visible_on_front' => true,
-        'is_visible_in_advanced_search' => true,
-        'default_value' => '1'
-    )
+$attributeParameters = array(
+    'label' => 'Gewicht',
+    'input' => 'text',
+    'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'is_visible' => true,
+    'is_required' => true,
+    'is_user_defined' => true,
+    'is_searchable' => true,
+    'is_comparable' => true,
+    'is_visible_on_front' => true,
+    'is_visible_in_advanced_search' => true,
+    'default_value' => '1'
 );
+$installer->addAttribute('catalog_product', 'weight', $attributeParameters);
 
 $installer->endSetup();
