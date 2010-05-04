@@ -5,7 +5,7 @@
 # =============================================================================
 NAME = 'symmetrics_config_german'
 
-TAGS = ('magento', 'module', 'symmetrics', 'config', 'german', 'germanconfig', 'locpack')
+TAGS = ('magento', 'module', 'symmetrics', 'config', 'german', 'mrg')
 
 LICENSE = 'AFL 3.0'
 
@@ -17,16 +17,16 @@ INSTALL_PATH = ''
 # responsibilities
 # =============================================================================
 TEAM_LEADER = {
-    'Sergej Braznikov': 'sb@symmetrics.de'
+    'Torsten Walluhn': 'tw@symmetrics.de',
 }
 
 MAINTAINER = {
-    'Eugen Gitin': 'eg@symmetrics.de'
+    'Siegfried Schmitz': 'ss@symmetrics.de',
 }
 
 AUTHORS = {
     'Eugen Gitin': 'eg@symmetrics.de',
-    'Siegfried Schmitz' : 'ss@symmetrics.de'
+    'Siegfried Schmitz': 'ss@symmetrics.de',
 }
 
 # =============================================================================
@@ -46,8 +46,8 @@ NOTES = '''
 # =============================================================================
 
 REQUIRES = [
-    {'magento': '*', 'magento_enterprise': '*'}, 
-    {'mc_module_locale_mage_community_de_de': '*'}, 
+    {'magento': '*', 'magento_enterprise': '*'},
+    {'mc_module_locale_mage_community_de_de': '*'},
 ]
 
 EXCLUDES = {
@@ -59,6 +59,6 @@ DEPENDS_ON_FILES = (
 PEAR_KEY = ''
 
 COMPATIBLE_WITH = {
-    'magento': ['1.4.0.0'],
-	'magento_enterprise': ['1.7.0.0']
+    'magento': ['1.4.0.1'],
+    'magento_enterprise': ['1.8.0.0'],
 }
