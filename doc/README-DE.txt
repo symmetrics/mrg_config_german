@@ -57,12 +57,12 @@ Config Modulen zu verwenden.
 
 ** FUNCTIONALITY
 *** A: Folgende Einstellungen werden gemacht:
-**** 1. Konfiguration der Mehrwertsteuer (7% und 19%)
-**** 2. Sprache, Land, Währung
-**** 3. Texte und E-Mail Adressen zentral veränderbar
-**** 4. Kundengruppen werden angelegt
-**** 5. Steuersätze werden angelegt
-**** 6. diverse Grund Einstellungen des Shops
+        1. Konfiguration der Mehrwertsteuer (7% und 19%)
+        2. Sprache, Land, Währung
+        3. Texte und E-Mail Adressen zentral veränderbar
+        4. Kundengruppen werden angelegt
+        5. Steuersätze werden angelegt
+        6. diverse Grund Einstellungen des Shops
 
 ** TECHNICAL
 WICHTIG! Die Daten aus config.xml werden nur bei
