@@ -158,16 +158,24 @@ foreach ($shippingMethods as $method) {
 $attributeParameters = array(
     'label' => 'Gewicht',
     'input' => 'text',
+    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,    
+    'required' => true,
+    'user_defined' => true,    
+    'default' => '1'
+);
+$installer->addAttribute('catalog_product', 'weight', $attributeParameters);
+// Unfortunately the following fields are not processed by addAttribute method.
+// The code bellow will update default values, used in addAttribute.
+$attributeParameters = array(
     'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'is_visible' => true,
-    'is_required' => true,
-    'is_user_defined' => true,
+    'is_filterable' => true,
     'is_searchable' => true,
     'is_comparable' => true,
     'is_visible_on_front' => true,
     'is_visible_in_advanced_search' => true,
-    'default_value' => '1'
+    'used_in_product_listing' => true,    
 );
-$installer->addAttribute('catalog_product', 'weight', $attributeParameters);
+$installer->updateAttribute('catalog_product', 'weight', $attributeParameters);
 
 $installer->endSetup();
