@@ -134,6 +134,8 @@ $installer->setConfigData('shipping/origin/city', $configData['default']['city']
 $installer->setConfigData('google/googlebase/target_country', 'DE');
 $installer->setConfigData('payment/free/title', 'Keine Zahlungsinformationen benötigt');
 $installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung');
+/* disallow reorder */
+$installer->setConfigData('sales/reorder/allow', '0');
 
 /* shipping method codes */
 $shippingMethods = array(
