@@ -34,29 +34,29 @@ Mehrwersteuerkonfiguration. Alle bereits erstellten
 Klassen und Mehrwersteuersätze werden entfernt und 
 überschrieben. Es werden auch alle bereits gemachten
 Einstellungen in "Konfiguration" gelöscht. Es ist
-dringend empfehlenswert dieses Modul ausschliesslich
+dringend nötig dieses Modul ausschliesslich
 auf einen leeren Shop zu installieren.
 
 ** USAGE
 Das Modul Symmetrics_ConfigGerman konfiguriert einen
 Magento-Shop für den deutschen Markt. Es werden typische
-Einstellungen am Shop vorgenommen, die man eigentlich
-von einem Webshop in Deutschland erwartet. Es werden 
+Einstellungen am Shop vorgenommen, die man von einem
+Webshop in Deutschland erwartet. Es werden 
 auch Beispieltexte installiert um dem Shopbetreiber
-es leichter zu machen den Shop so schnell wie möglich
+es zu erleichtern, den Shop so schnell wie möglich
 online zu bringen.
 
 Zum Anderen bietet das Modul eine bequeme Möglichkeit
 die Texte und andere Einstellungen über eine zentrale
-Stelle vor der Installation des Moduls zu verändern wenn 
-das gewünscht ist.
+Stelle vor der Installation des Moduls zu verändern, falls
+dies gewünscht ist.
 
 Sehr empfehlenswert ist es dieses Modul zusammen mit
 Symmetrics_ConfigGermanTexts und anderen Symmetrics
 Config Modulen zu verwenden.
 
 ** FUNCTIONALITY
-*** A: Folgende Einstellungen werden gemacht:
+*** A: Folgende Einstellungen werden vorgenommen:
         1. Konfiguration der Mehrwertsteuer (7% und 19%)
         2. Sprache, Land, Währung
         3. Texte und E-Mail Adressen zentral veränderbar
@@ -67,9 +67,9 @@ Config Modulen zu verwenden.
 ** TECHNICAL
 WICHTIG! Die Daten aus config.xml werden nur bei
 der Neuinstallation des Moduls in die Datenbank
-geschrieben. Alle weitere Änderungen in config.xml
+geschrieben. Alle weiteren Änderungen in config.xml
 werden ignoriert. Alle Aenderungen, die nach der
-Installation gemacht werden, müssen über die Admin-
+Installation vorgenommen werden, müssen über die Admin-
 Oberfläche erfolgen.
 
 Bei der Installation des Moduls wird die 
@@ -78,10 +78,10 @@ zunächst die bereits vorhandene Mehrwertsteuerkonfiguration
 und schreibt eigene Klassen und Klassenabhängigkeiten
 in die Datenbank. Dies ist nötig um Konflikte zwischen
 unterschiedlichen Mehrwertsteuersätzen zu vermeiden, 
-die durch bereits installierte Klassen auftreten 
+die durch, bereits installierte, Klassen auftreten 
 können.
 
-Die Konfigurationstabelle wird mithilfe der Magento
+Die Konfigurationstabelle wird mit Hilfe der Magento
 eigenen Funktion setConfigData verändert. Die 
 Einstellungen werden für den Scope = Default (Alle
 Stores, Alle Views) vorgenommen.
@@ -97,7 +97,7 @@ Das heisst, dass die Updates dieses Moduls nur dann
 möglich sind, wenn die Konfiguration nach der
 Installation unverändert bleibt. Im Rahmen der 
 Wartung wird die Symmetrics GmbH aber immer ein DIFF-
-zwischen den einzelnen Update zur Verfügung stellen.
+zwischen den einzelnen Updates zur Verfügung stellen.
 So können Sie manuell die benötigten neuen Funktionen
 und veränderten Einstellungen aktivieren oder deaktivieren
 indem Sie den Anweisungen in den Update-READMEs folgen.
