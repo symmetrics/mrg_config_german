@@ -21,7 +21,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.symmetrics.de/
  */
- 
+
 $configData = Mage::getConfig()->getNode('default/config_german')->asArray();
 
 $installer = $this;
@@ -66,10 +66,14 @@ $installer->setConfigData('general/country/allow', 'DE');
 $installer->setConfigData('general/locale/firstday', '1');
 $installer->setConfigData('general/locale/weekend', '0,6');
 $installer->setConfigData('web/secure/use_in_frontend', '1');
-$installer->setConfigData('web/session/use_remote_addr', '1');
-$installer->setConfigData('web/session/use_http_via', '1');
-$installer->setConfigData('web/session/use_http_x_forwarded_for', '1');
-$installer->setConfigData('web/session/use_http_user_agent', '1');
+// NOTE: The following session configuration highly depends on hosting and
+//       productive environment. Please, use them with care and uncomment
+//       only if you know what you are doing. They are still recommended for
+//       security reasons, but beware that this must be tested individually.
+//$installer->setConfigData('web/session/use_remote_addr', '1');
+//$installer->setConfigData('web/session/use_http_via', '1');
+//$installer->setConfigData('web/session/use_http_x_forwarded_for', '1');
+//$installer->setConfigData('web/session/use_http_user_agent', '1');
 $installer->setConfigData('web/cookie/cookie_lifetime', '0');
 $installer->setConfigData('design/head/default_title', $configData['default']['shop_name']);
 $installer->setConfigData('design/head/default_description', $configData['default']['meta_description']);
@@ -130,6 +134,8 @@ $installer->setConfigData('shipping/origin/city', $configData['default']['city']
 $installer->setConfigData('google/googlebase/target_country', 'DE');
 $installer->setConfigData('payment/free/title', 'Keine Zahlungsinformationen benötigt');
 $installer->setConfigData('payment/checkmo/title', 'Scheck / Zahlungsanweisung');
+/* disallow reorder */
+$installer->setConfigData('sales/reorder/allow', '0');
 
 /* shipping method codes */
 $shippingMethods = array(
@@ -142,7 +148,8 @@ $shippingMethods = array(
     'freeshipping'
 );
 
-$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
+$errorMsg = 'Diese Versandmethode ist derzeit nicht verfügbar. ';
+$errorMsg .= 'Bitte kontaktieren Sie uns wenn sie diese Methode verwenden möchten.';
 
 /* set default error message for shipping methods */
 foreach ($shippingMethods as $method) {
@@ -150,22 +157,27 @@ foreach ($shippingMethods as $method) {
 }
 
 /* add weight attribute */
-$installer->addAttribute(
-    'catalog_product', 
-    'weight', 
-    array(
-        'label' => 'Gewicht',
-        'input' => 'text',
-        'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
-        'is_visible' => true,
-        'is_required' => true,
-        'is_user_defined' => true,
-        'is_searchable' => true,
-        'is_comparable' => true,
-        'is_visible_on_front' => true,
-        'is_visible_in_advanced_search' => true,
-        'default_value' => '1'
-    )
+$attributeParameters = array(
+    'label' => 'Gewicht',
+    'input' => 'text',
+    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,    
+    'required' => true,
+    'user_defined' => true,    
+    'default' => '1'
 );
+$installer->addAttribute('catalog_product', 'weight', $attributeParameters);
+// Unfortunately the following fields are not processed by addAttribute method.
+// The code bellow will update default values, used in addAttribute.
+$attributeParameters = array(
+    'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'is_visible' => true,
+    'is_filterable' => true,
+    'is_searchable' => true,
+    'is_comparable' => true,
+    'is_visible_on_front' => true,
+    'is_visible_in_advanced_search' => true,
+    'used_in_product_listing' => true,    
+);
+$installer->updateAttribute('catalog_product', 'weight', $attributeParameters);
 
 $installer->endSetup();
