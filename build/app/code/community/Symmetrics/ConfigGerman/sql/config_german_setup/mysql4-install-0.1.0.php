@@ -36,12 +36,12 @@ $taxTables = array(
 
 foreach ($taxTables as $table) {
     /* truncate table (not delete) */
-    $this->_conn->delete($table);
+    $this->_conn->delete($this->getTable($table));
     $data = $this->getInsertData($table);
 
     /* insert new tax settings */
     foreach ($data as $insert) {
-        $this->_conn->insert($table, $insert);
+        $this->_conn->insert($this->getTable($table), $insert);
     }
 }
 
