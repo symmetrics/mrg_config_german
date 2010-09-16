@@ -107,5 +107,4 @@ Keine Probleme bekannt.
 
 * TESTCASES
 ** BASIC
-*** A: ACHTUNG! Es fehlt ein ausführlicher Testfall.
-
+*** A: Prüfen Sie, ob die o.g. Einstellungen entsprechend umgesetzt sind.
