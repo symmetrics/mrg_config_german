@@ -11,7 +11,7 @@ Copy app/ folder to the Projekt-root.
 
 2. Open config German/etc/config.xml and replace example texts with own
 data. These data can later be changed in the the admin interface in
-über die Admin-Oberfläche im Bereich "Konfiguration"
+√úber die Admin-Oberfl√§che im Bereich "Konfiguration"
 "Configuration" section.
 
 For example: 
