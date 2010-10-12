@@ -46,7 +46,7 @@ Symmetrics_ConfigGermanTexts and other Symmetrics
 Config modules.
 
 ** FUNCTIONALITY
-* A: The following settings are made:
+*** A: The following settings are made:
         1. Configuration of value-added tax (7% and 19%)
         2. Language, country, currency
         3. Texts and e-mail addresses centrally changeable 
@@ -86,6 +86,6 @@ by following the instructions in the update-READMEs.
 ** PROBLEMS
 No problems are known.
 
-TESTCASES
+* TESTCASES
 ** BASIC
 *** A: ATTENTION! A detailed test case is missing.
