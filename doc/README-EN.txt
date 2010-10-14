@@ -1,110 +1,91 @@
 * DOCUMENTATION
 
 ** INSTALLATION
-Es ist sehr empfehlenswert das Modul auf einen 
-komplett leeren  und neuen Shop zu installieren. Durch die 
-Installation wird die vorhandene Konfiguration überschrieben
-und die Mehrwersteuerkonfiguration gelöscht.
+It is highly recommended to install the module on a fully
+empty and new shop. Because of the installation the available
+configuration is overwritten and the value-added tax
+configuration is deleted.
 
-1. Extrahieren Sie den Inhalt dieses Archivs in Ihr Magento Verzeichnis.
-Ordner app/ in den Projekt-Root kopieren.
+1. Extract the content of this archive to your Magento directory.
+Copy app/ folder to the Projekt-root.
 
-2. ConfigGerman/etc/config.xml öffnen und Beispieltexte
-mit eigenen Daten ersetzen. Diese Daten können später 
-über die Admin-Oberfläche im Bereich "Konfiguration" 
-geändert werden.
+2. Open config German/etc/config.xml and replace example texts with own
+data. These data can later be changed in the the admin interface in
+Über die Admin-Oberfläche im Bereich "Konfiguration"
+"Configuration" section.
 
-z.B.: 
+For example: 
 <shop_name><![CDATA[Shop-Name]]></shop_name>
-ändern in
+change to
 <shop_name><![CDATA[Mein Shop]]></shop_name>
 
-Bitte beachten Sie, dass die XML-Datei in UTF-8
-(Ohne BOM) gespeichert werden muss.
+Please note that the XML file should be saved in UTF-8 (without BOM).
+4. Clear the cache
+5. Go to fronted
+6. Ready
 
-4. Cache löschen
-
-5. Frontend aufrufen
-
-6. Fertig
-
-ACHTUNG!!! Das Modul überschreibt unwiderruflich 
-die bereits vorhandene Konfiguration inkl. 
-Mehrwersteuerkonfiguration. Alle bereits erstellten 
-Klassen und Mehrwersteuersätze werden entfernt und 
-überschrieben. Es werden auch alle bereits gemachten
-Einstellungen in "Konfiguration" gelöscht. Es ist
-dringend nötig dieses Modul ausschliesslich
-auf einen leeren Shop zu installieren.
+ATTENTION!!! The module overwrites irreversibly the already available
+configuration incl. the value-added tax configuration. All already created
+classes and value-added rates are removed and overwritten. All already
+made settings in "Configuration" are deleted as well. It is urgently needed
+to install this module exclusively on an empty shop.
 
 ** USAGE
-Das Modul Symmetrics_ConfigGerman konfiguriert einen
-Magento-Shop für den deutschen Markt. Es werden typische
-Einstellungen am Shop vorgenommen, die man von einem
-Webshop in Deutschland erwartet. Es werden 
-auch Beispieltexte installiert um dem Shopbetreiber
-es zu erleichtern, den Shop so schnell wie möglich
-online zu bringen.
+The Symmetrics_ConfigGerman module configures a
+Magento shop for the German market. Typical settings that
+one expects from a web-shop in Germany are made. Also the
+example texts are installed in order to make it easier for the
+shop owner to take the shop online as quickly as possible.
 
-Zum Anderen bietet das Modul eine bequeme Möglichkeit
-die Texte und andere Einstellungen über eine zentrale
-Stelle vor der Installation des Moduls zu verändern, falls
-dies gewünscht ist.
+For others the module provides a convenient opportunity to change the texts
+and other settings in a central place before the installation of the module, if
+it is necessary.
 
-Sehr empfehlenswert ist es dieses Modul zusammen mit
-Symmetrics_ConfigGermanTexts und anderen Symmetrics
-Config Modulen zu verwenden.
+It is highly recommended to use this module together with 
+Symmetrics_ConfigGermanTexts and other Symmetrics
+Config modules.
 
 ** FUNCTIONALITY
-*** A: Folgende Einstellungen werden vorgenommen:
-        1. Konfiguration der Mehrwertsteuer (7% und 19%)
-        2. Sprache, Land, Währung
-        3. Texte und E-Mail Adressen zentral veränderbar
-        4. Kundengruppen werden angelegt
-        5. Steuersätze werden angelegt
-        6. diverse Grund Einstellungen des Shops
+*** A: The following settings are made:
+        1. Configuration of value-added tax (7% and 19%)
+        2. Language, country, currency
+        3. Texts and e-mail addresses centrally changeable 
+        4. Customer groups are created
+        5. Tax rates are created
+        6. Diverse base settings of the shop
 
 ** TECHNICAL
-WICHTIG! Die Daten aus config.xml werden nur bei
-der Neuinstallation des Moduls in die Datenbank
-geschrieben. Alle weiteren Änderungen in config.xml
-werden ignoriert. Alle Aenderungen, die nach der
-Installation vorgenommen werden, müssen über die Admin-
-Oberfläche erfolgen.
+IMPORTANT! The data from config.xml are written to the
+database only upon a new installation of the module. All
+other changes in config.xml are ignored. All changes that
+were made after the installation, should be made via the
+admin-interface.
 
-Bei der Installation des Moduls wird die 
-SQL-Migrationsdatei ausgeführt. Diese Datei löscht
-zunächst die bereits vorhandene Mehrwertsteuerkonfiguration
-und schreibt eigene Klassen und Klassenabhängigkeiten
-in die Datenbank. Dies ist nötig um Konflikte zwischen
-unterschiedlichen Mehrwertsteuersätzen zu vermeiden, 
-die durch, bereits installierte, Klassen auftreten 
-können.
+Upon installation of the module the SQL migration file is executed. This 
+file then deletes already available value-added tax configuration and writes 
+own classes and class dependencies to the database. This is necessary in order 
+to avoid conflicts between different value-added tax rates that can occur due 
+to already installed classes.
 
-Die Konfigurationstabelle wird mit Hilfe der Magento
-eigenen Funktion setConfigData verändert. Die 
-Einstellungen werden für den Scope = Default (Alle
-Stores, Alle Views) vorgenommen.
+The configuration table is changed with the help of the Magento 
+own function setConfigData. The settings are made for the 
+Scope = Default (All
+stores, all views)
 
-Sie können auch andere Einstellungen in der 
-Migrationsdatei mysql4-install-x.x.x.php vornehmen.
-Beachten Sie bitte, dass diese Änderungen nur
-von jemanden vorgenommen werden können der sich
-gut mit der Magento-Struktur und PHP auskennt.
+You can also make other settings in the migration file 
+mysql4-install-x.x.x.php. Please note, that these changes can 
+be made only by someone who knows well the Magento structure and PHP.
 
-Symmetrics_ConfigGerman ist ein Konfigurationsmodul.
-Das heisst, dass die Updates dieses Moduls nur dann
-möglich sind, wenn die Konfiguration nach der
-Installation unverändert bleibt. Im Rahmen der 
-Wartung wird die Symmetrics GmbH aber immer ein DIFF-
-zwischen den einzelnen Updates zur Verfügung stellen.
-So können Sie manuell die benötigten neuen Funktionen
-und veränderten Einstellungen aktivieren oder deaktivieren
-indem Sie den Anweisungen in den Update-READMEs folgen.
+Symmetrics_ConfigGerman is a configuration module. This means that the 
+updates of this module are possible only when the configuration remains 
+unchangeable after the installation. Within the frameworks of maintenance, 
+the Symmetrics GmbH will always provide a DIFF- between the separate updates. 
+So you can manually activate or deactivate new functions and changed settings 
+by following the instructions in the update-READMEs.
 
 ** PROBLEMS
-Keine Probleme bekannt.
+No problems are known.
 
 * TESTCASES
 ** BASIC
-*** A: Prüfen Sie, ob die o.g. Einstellungen entsprechend umgesetzt sind.
+*** A: ATTENTION! A detailed test case is missing.
