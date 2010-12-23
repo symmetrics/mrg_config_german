@@ -6,13 +6,12 @@ empty and new shop. Because of the installation the available
 configuration is overwritten and the value-added tax
 configuration is deleted.
 
-1. Extract the content of this archive to your Magento directory.
+1. Extract content of this archive to your Magento directory.
 Copy app/ folder to the Projekt-root.
 
 2. Open config German/etc/config.xml and replace example texts with own
 data. These data can later be changed in the the admin interface in
-Über die Admin-Oberfläche im Bereich "Konfiguration"
-"Configuration" section.
+admin panel, "Configuration" section.
 
 For example: 
 <shop_name><![CDATA[Shop-Name]]></shop_name>
@@ -38,7 +37,7 @@ example texts are installed in order to make it easier for the
 shop owner to take the shop online as quickly as possible.
 
 For others the module provides a convenient opportunity to change the texts
-and other settings in a central place before the installation of the module, if
+and other settings in a central place before installation of the module, if
 it is necessary.
 
 It is highly recommended to use this module together with 
@@ -76,7 +75,7 @@ You can also make other settings in the migration file
 mysql4-install-x.x.x.php. Please note, that these changes can 
 be made only by someone who knows well the Magento structure and PHP.
 
-Symmetrics_ConfigGerman is a configuration module. This means that the 
+Symmetrics_ConfigGerman is a configuration module. This means that
 updates of this module are possible only when the configuration remains 
 unchangeable after the installation. Within the frameworks of maintenance, 
 the Symmetrics GmbH will always provide a DIFF- between the separate updates. 
