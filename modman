@@ -1,0 +1,5 @@
+build/app/code/community/Symmetrics/ConfigGerman/etc/config.xml app/code/community/Symmetrics/ConfigGerman/etc/config.xml
+build/app/code/community/Symmetrics/ConfigGerman/Model/Setup.php app/code/community/Symmetrics/ConfigGerman/Model/Setup.php
+build/app/code/community/Symmetrics/ConfigGerman/sql/config_german_setup/mysql4-install-0.1.0.php app/code/community/Symmetrics/ConfigGerman/sql/config_german_setup/mysql4-install-0.1.0.php
+build/app/code/community/Symmetrics/ConfigGerman/sql/config_german_setup/mysql4-upgrade-0.2.12-0.2.14.php app/code/community/Symmetrics/ConfigGerman/sql/config_german_setup/mysql4-upgrade-0.2.12-0.2.14.php
+build/app/etc/modules/Symmetrics_Config.xml app/etc/modules/Symmetrics_Config.xml
